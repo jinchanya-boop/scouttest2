@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>แบบทดสอบลูกเสือสามัญรุ่นใหญ่ ม.3</title>
+  <title>แบบทดสอบลูกเสือสามัญรุ่นใหญ่ ม.2</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏕️</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // ปิดคำเตือน Tailwind CDN
+    console.log('%c✅ Tailwind CSS loaded', 'color: #10b981; font-weight: bold;');
+  </script>
   <style>
     body {
       box-sizing: border-box;
@@ -13,11 +18,11 @@
     }
     
     .gradient-bg {
-      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #f59e0b 100%);
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #81c784 100%);
     }
     
     .card-shadow {
-      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.1);
+      box-shadow: 0 10px 25px rgba(76, 175, 80, 0.1);
     }
     
     .question-card {
@@ -27,7 +32,7 @@
     
     .question-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 15px 35px rgba(245, 158, 11, 0.15);
+      box-shadow: 0 15px 35px rgba(76, 175, 80, 0.15);
     }
     
     .option-button {
@@ -36,29 +41,29 @@
     }
     
     .option-button:hover {
-      border-color: #f59e0b;
-      background-color: #fffbeb;
+      border-color: #66bb6a;
+      background-color: #f1f8f4;
     }
     
     .option-button.selected {
-      border-color: #f59e0b;
-      background-color: #fef3c7;
-      color: #92400e;
+      border-color: #4caf50;
+      background-color: #e8f5e9;
+      color: #2e7d32;
     }
     
     .submit-button {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
       transition: all 0.3s ease;
     }
     
     .submit-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+      box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
     }
     
     .loading-spinner {
       border: 3px solid #f3f4f6;
-      border-top: 3px solid #f59e0b;
+      border-top: 3px solid #4caf50;
       border-radius: 50%;
       width: 20px;
       height: 20px;
@@ -71,7 +76,7 @@
     }
     
     .score-circle {
-      background: conic-gradient(#f59e0b 0deg, #f59e0b var(--percentage), #e5e7eb var(--percentage), #e5e7eb 360deg);
+      background: conic-gradient(#4caf50 0deg, #4caf50 var(--percentage), #e5e7eb var(--percentage), #e5e7eb 360deg);
       border-radius: 50%;
       width: 120px;
       height: 120px;
@@ -95,12 +100,33 @@
       z-index: 1;
       font-weight: 700;
       font-size: 1.5rem;
-      color: #f59e0b;
+      color: #4caf50;
     }
 
     .logo-img {
       max-width: 80px;
       height: auto;
+    }
+
+    .refresh-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e3f2fd;
+      color: #1976d2;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 500;
+    }
+
+    .refresh-icon {
+      animation: rotate 2s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
@@ -112,14 +138,14 @@
         <div class="flex items-center space-x-4">
           <img src="https://img2.pic.in.th/pic/sa1.png" alt="Logo" class="logo-img">
           <div>
-            <h1 class="text-2xl font-bold text-gray-800" id="exam-title">แบบทดสอบลูกเสือสามัญรุ่นใหญ่ ม.3</h1>
+            <h1 class="text-2xl font-bold text-gray-800" id="exam-title">แบบทดสอบลูกเสือสามัญรุ่นใหญ่ ม.2</h1>
             <p class="text-gray-600" id="school-name">โรงเรียนสา</p>
-            <p class="text-sm text-gray-500" id="grade-level">มัธยมศึกษาปีที่ 3</p>
+            <p class="text-sm text-gray-500" id="grade-level">มัธยมศึกษาปีที่ 2</p>
           </div>
         </div>
         <div class="text-right">
-          <div class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium" id="question-count">
-            📝 <span id="total-questions">20</span> ข้อ
+          <div class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
+            📝 20 ข้อ
           </div>
         </div>
       </div>
@@ -128,76 +154,68 @@
     <!-- Subject Selection -->
     <div class="bg-white rounded-2xl card-shadow p-6 mb-6" id="subject-selection">
       <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-        <span class="bg-yellow-100 text-yellow-600 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">📚</span> 
+        <span class="bg-green-100 text-green-600 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">📚</span> 
         เลือกรายวิชา
       </h2>
       <div class="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
-        <div class="flex items-center text-green-700">
-          <span class="text-lg mr-2">📊</span> 
-          <span class="font-medium text-sm">ผลการสอบทุกวิชาจะถูกบันทึกลง Google Sheet อัตโนมัติ</span>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center text-green-700">
+            <span class="text-lg mr-2">📊</span> 
+            <span class="font-medium text-sm">ผลการสอบจะถูกบันทึกทั้งใน Google Sheet และในเครื่องของคุณ</span>
+          </div>
+          <span class="refresh-indicator" id="sync-status">
+            <span class="refresh-icon">🔄</span>
+            <span>ซิงค์อัตโนมัติ</span>
+          </span>
         </div>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <button onclick="selectSubject(0)" class="subject-card p-4 border-2 border-gray-200 rounded-xl hover:border-yellow-400 hover:bg-yellow-50 transition-all text-left">
+        <button onclick="selectSubject(0)" class="subject-card p-4 border-2 border-gray-200 rounded-xl hover:border-green-400 hover:bg-green-50 transition-all text-left">
           <div class="flex items-center mb-2">
             <span class="text-2xl mr-3">🏅</span> 
             <span class="font-semibold text-gray-800">วิชาที่ 1</span>
           </div>
-          <p class="text-sm text-gray-600">เครื่องหมายลูกเสือหลวง</p>
-          <p class="text-xs text-gray-500 mt-1">20 ข้อ</p>
+          <p class="text-sm text-gray-600">เครื่องหมายลูกเสือชั้นพิเศษ</p>
         </button>
 
-        <button onclick="selectSubject(1)" class="subject-card p-4 border-2 border-gray-200 rounded-xl hover:border-yellow-400 hover:bg-yellow-50 transition-all text-left">
+        <button onclick="selectSubject(1)" class="subject-card p-4 border-2 border-gray-200 rounded-xl hover:border-green-400 hover:bg-green-50 transition-all text-left">
           <div class="flex items-center mb-2">
-            <span class="text-2xl mr-3">🏕️</span> 
+            <span class="text-2xl mr-3">👥</span> 
             <span class="font-semibold text-gray-800">วิชาที่ 2</span>
           </div>
-          <p class="text-sm text-gray-600">ผู้จัดการค่ายพักแรม</p>
-          <p class="text-xs text-gray-500 mt-1">20 ข้อ</p>
+          <p class="text-sm text-gray-600">หน้าที่พลเมือง</p>
         </button>
 
-        <button onclick="selectSubject(2)" class="subject-card p-4 border-2 border-gray-200 rounded-xl hover:border-yellow-400 hover:bg-yellow-50 transition-all text-left">
+        <button onclick="selectSubject(2)" class="subject-card p-4 border-2 border-gray-200 rounded-xl hover:border-green-400 hover:bg-green-50 transition-all text-left">
           <div class="flex items-center mb-2">
-            <span class="text-2xl mr-3">⭐</span> 
+            <span class="text-2xl mr-3">🪢</span> 
             <span class="font-semibold text-gray-800">วิชาที่ 3</span>
           </div>
-          <p class="text-sm text-gray-600">นักดาราศาสตร์</p>
-          <p class="text-xs text-gray-500 mt-1">20 ข้อ</p>
+          <p class="text-sm text-gray-600">นักบุกเบิก</p>
         </button>
 
-        <button onclick="selectSubject(3)" class="subject-card p-4 border-2 border-gray-200 rounded-xl hover:border-yellow-400 hover:bg-yellow-50 transition-all text-left">
+        <button onclick="selectSubject(3)" class="subject-card p-4 border-2 border-gray-200 rounded-xl hover:border-green-400 hover:bg-green-50 transition-all text-left">
           <div class="flex items-center mb-2">
-            <span class="text-2xl mr-3">🏔️</span> 
+            <span class="text-2xl mr-3">🔍</span> 
             <span class="font-semibold text-gray-800">วิชาที่ 4</span>
           </div>
-          <p class="text-sm text-gray-600">นักผจญภัย</p>
-          <p class="text-xs text-gray-500 mt-1">20 ข้อ</p>
+          <p class="text-sm text-gray-600">การสะกดรอย</p>
         </button>
 
-        <button onclick="selectSubject(4)" class="subject-card p-4 border-2 border-gray-200 rounded-xl hover:border-yellow-400 hover:bg-yellow-50 transition-all text-left">
+        <button onclick="selectSubject(4)" class="subject-card p-4 border-2 border-gray-200 rounded-xl hover:border-green-400 hover:bg-green-50 transition-all text-left">
           <div class="flex items-center mb-2">
-            <span class="text-2xl mr-3">👨‍🍳</span> 
+            <span class="text-2xl mr-3">🌳</span> 
             <span class="font-semibold text-gray-800">วิชาที่ 5</span>
           </div>
-          <p class="text-sm text-gray-600">หัวหน้าคนครัว</p>
-          <p class="text-xs text-gray-500 mt-1">20 ข้อ</p>
+          <p class="text-sm text-gray-600">ผู้พิทักษ์ป่า</p>
         </button>
 
-        <button onclick="selectSubject(5)" class="subject-card p-4 border-2 border-green-200 rounded-xl hover:border-green-400 hover:bg-green-50 transition-all text-left bg-green-50">
-          <div class="flex items-center mb-2">
-            <span class="text-2xl mr-3">🌿</span> 
-            <span class="font-semibold text-green-800">วิชาที่ 6 ✨ใหม่</span>
-          </div>
-          <p class="text-sm text-green-700">การอนุรักษ์ธรรมชาติ</p>
-          <p class="text-xs text-green-600 mt-1">30 ข้อ</p>
-        </button>
-
-        <button onclick="showSummary()" class="subject-card p-4 border-2 border-yellow-300 rounded-xl hover:border-yellow-500 hover:bg-yellow-100 transition-all text-left bg-yellow-50">
+        <button onclick="showSummary()" class="subject-card p-4 border-2 border-green-300 rounded-xl hover:border-green-500 hover:bg-green-100 transition-all text-left bg-green-50">
           <div class="flex items-center mb-2">
             <span class="text-2xl mr-3">📊</span> 
-            <span class="font-semibold text-yellow-700">สรุปผลคะแนน</span>
+            <span class="font-semibold text-green-700">สรุปผลคะแนน</span>
           </div>
-          <p class="text-sm text-yellow-600">ดูผลคะแนนทั้ง 6 วิชา</p>
+          <p class="text-sm text-green-600">ดูผลคะแนนทั้ง 5 วิชา</p>
         </button>
 
         <button onclick="showStudentDashboard()" class="subject-card p-4 border-2 border-blue-300 rounded-xl hover:border-blue-500 hover:bg-blue-100 transition-all text-left bg-blue-50">
@@ -213,1865 +231,1273 @@
     <!-- Student Info Form -->
     <div class="bg-white rounded-2xl card-shadow p-6 mb-6" id="student-info-section" style="display: none;">
       <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-        <span class="bg-yellow-100 text-yellow-600 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">👤</span> 
-        ข้อมูลนักเรียน
+        <span class="bg-green-100 text-green-600 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">✏️</span> 
+        ข้อมูลผู้สอบ
       </h2>
-      <div class="grid md:grid-cols-3 gap-4">
+      <div class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">ชื่อ-นามสกุล</label>
-          <input type="text" id="student-name" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent" placeholder="กรอกชื่อ-นามสกุล">
+          <input type="text" id="student-name" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-all" placeholder="กรอกชื่อ-นามสกุล">
         </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">ชั้น</label>
-          <select id="class-room" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
-            <option value="">เลือกชั้นเรียน</option>
-            <option value="ม.3/1">ม.3/1</option>
-            <option value="ม.3/2">ม.3/2</option>
-            <option value="ม.3/3">ม.3/3</option>
-            <option value="ม.3/4">ม.3/4</option>
-            <option value="ม.3/5">ม.3/5</option>
-            <option value="ม.3/6">ม.3/6</option>
-            <option value="ม.3/7">ม.3/7</option>
-            <option value="ม.3/8">ม.3/8</option>
-          </select>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">ชั้น</label>
+            <input type="text" id="student-class" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-all" placeholder="เช่น 2/1">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">เลขที่</label>
+            <input type="number" id="student-number" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-all" placeholder="เลขที่">
+          </div>
         </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">เลขที่</label>
-          <input type="number" id="student-number" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent" placeholder="เลขที่">
-        </div>
-      </div>
-      <div class="mt-4 flex space-x-3">
-        <button onclick="backToSubjectSelection()" class="bg-gray-500 text-white px-6 py-3 rounded-xl hover:bg-gray-600 transition-colors font-medium">
-          ← เลือกวิชาใหม่
-        </button>
-        <button onclick="startExam()" class="bg-yellow-600 text-white px-6 py-3 rounded-xl hover:bg-yellow-700 transition-colors font-medium">
-          เริ่มทำแบบทดสอบ
+        <button onclick="startExam()" class="w-full submit-button text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center space-x-2">
+          <span>🚀</span>
+          <span>เริ่มทำแบบทดสอบ</span>
         </button>
       </div>
     </div>
 
-    <!-- Quiz Section -->
-    <div id="quiz-section" style="display: none;">
+    <!-- Exam Section -->
+    <div id="exam-section" style="display: none;">
       <div class="bg-white rounded-2xl card-shadow p-6 mb-6">
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-xl font-semibold text-gray-800">แบบทดสอบ</h2>
-          <div class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium" id="progress">
-            ข้อ 1 จาก <span id="current-total">20</span>
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="text-xl font-semibold text-gray-800" id="current-subject-title">รายวิชา</h2>
+            <p class="text-sm text-gray-600" id="student-info-display"></p>
+          </div>
+          <div class="text-right">
+            <div class="text-sm text-gray-600">ข้อที่</div>
+            <div class="text-2xl font-bold text-green-600">
+              <span id="current-question">1</span> / <span id="total-questions">20</span>
+            </div>
           </div>
         </div>
-        <div id="questions-container"></div>
-        <div class="mt-8 flex justify-center">
-          <button onclick="submitExam()" id="submit-btn" class="submit-button text-white px-8 py-4 rounded-xl font-semibold text-lg">
-            <span id="submit-text">ส่งข้อสอบ</span>
-            <div id="submit-loading" class="loading-spinner hidden inline-block ml-2"></div>
+        
+        <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-6 rounded-r-lg">
+          <p class="text-gray-700 font-medium text-lg" id="question-text"></p>
+        </div>
+        
+        <div class="space-y-3 mb-6" id="options-container"></div>
+        
+        <div class="flex justify-between items-center">
+          <button onclick="previousQuestion()" id="prev-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-all flex items-center space-x-2">
+            <span>⬅️</span>
+            <span>ข้อก่อนหน้า</span>
+          </button>
+          
+          <button onclick="nextQuestion()" id="next-btn" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-all flex items-center space-x-2">
+            <span>ข้อถัดไป</span>
+            <span>➡️</span>
+          </button>
+          
+          <button onclick="submitExam()" id="submit-btn" style="display: none;" class="submit-button text-white font-bold py-3 px-8 rounded-lg flex items-center space-x-2">
+            <span>✅</span>
+            <span>ส่งข้อสอบ</span>
           </button>
         </div>
+      </div>
+      
+      <!-- Question Navigator -->
+      <div class="bg-white rounded-2xl card-shadow p-6">
+        <h3 class="font-semibold text-gray-800 mb-4">ข้ามไปข้อที่</h3>
+        <div class="grid grid-cols-10 gap-2" id="question-navigator"></div>
       </div>
     </div>
 
     <!-- Results Section -->
-    <div id="results-section" style="display: none;">
-      <div class="bg-white rounded-2xl card-shadow p-8 text-center">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">ผลการสอบ</h2>
-        <div class="flex justify-center mb-6">
-          <div class="score-circle" id="score-circle">
-            <div class="score-text" id="score-display">0%</div>
-          </div>
+    <div class="bg-white rounded-2xl card-shadow p-6" id="results-section" style="display: none;">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-2">🎉 ผลการสอบ</h2>
+        <p class="text-gray-600">ผลคะแนนของคุณ</p>
+      </div>
+      
+      <div class="flex justify-center mb-8">
+        <div class="score-circle" id="score-display" style="--percentage: 0deg;">
+          <div class="score-text" id="score-percentage">0%</div>
         </div>
-        <div class="grid md:grid-cols-2 gap-6 mb-6">
-          <div class="bg-yellow-50 p-4 rounded-xl">
-            <div class="text-2xl font-bold text-yellow-600" id="correct-answers">0</div>
-            <div class="text-gray-600">ข้อที่ถูก</div>
-          </div>
-          <div class="bg-red-50 p-4 rounded-xl">
-            <div class="text-2xl font-bold text-red-600" id="wrong-answers">0</div>
-            <div class="text-gray-600">ข้อที่ผิด</div>
-          </div>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-green-50 p-4 rounded-lg text-center">
+          <div class="text-green-600 text-3xl font-bold" id="correct-count">0</div>
+          <div class="text-gray-600 text-sm">ตอบถูก</div>
         </div>
-        <div class="text-lg font-medium text-gray-700 mb-4" id="grade-text"></div>
-        <div class="flex gap-3 justify-center">
-          <button onclick="backToSubjectSelection()" class="bg-gray-600 text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition-colors font-medium">
-            ← กลับหน้าหลัก
-          </button>
-          <button onclick="clearLocalStorage()" class="bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition-colors font-medium">
-            🗑️ ลบข้อมูล
-          </button>
+        
+        <div class="bg-red-50 p-4 rounded-lg text-center">
+          <div class="text-red-600 text-3xl font-bold" id="wrong-count">0</div>
+          <div class="text-gray-600 text-sm">ตอบผิด</div>
         </div>
+        
+        <div class="bg-blue-50 p-4 rounded-lg text-center">
+          <div class="text-blue-600 text-3xl font-bold" id="score-display-text">0</div>
+          <div class="text-gray-600 text-sm">คะแนน</div>
+        </div>
+      </div>
+      
+      <div class="space-y-3" id="answers-review"></div>
+      
+      <div class="mt-6 space-y-3">
+        <button onclick="reviewAnswers()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+          📝 ดูเฉลยละเอียด
+        </button>
+        <button onclick="resetExam()" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+          🔄 ทำข้อสอบอีกครั้ง
+        </button>
+        <button onclick="backToSubjectSelection()" class="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+          🏠 กลับหน้าหลัก
+        </button>
       </div>
     </div>
 
     <!-- Summary Section -->
-    <div id="summary-section" style="display: none;">
-      <div class="bg-white rounded-2xl card-shadow p-6 mb-6">
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold text-gray-800 flex items-center">
-            <span class="bg-yellow-100 text-yellow-600 w-10 h-10 rounded-full flex items-center justify-center text-lg mr-3">📊</span> 
-            สรุปผลคะแนนทั้ง 6 วิชา
-          </h2>
-          <div class="flex gap-2">
-            <button onclick="backToSubjectSelection()" class="bg-gray-500 text-white px-4 py-2 rounded-xl hover:bg-gray-600 transition-colors">
-              ← กลับ
-            </button>
-            <button onclick="clearLocalStorage()" class="bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600 transition-colors">
-              🗑️ ลบข้อมูล
-            </button>
-          </div>
-        </div>
-        <div id="summary-content" class="space-y-4">
-          <div class="text-center text-gray-500 py-8">
-            <div class="text-4xl mb-4">📝</div>
-            <p>ยังไม่มีข้อมูลการสอบ</p>
-            <p class="text-sm">กรุณาทำแบบทดสอบก่อนเพื่อดูสรุปผลคะแนน</p>
-          </div>
-        </div>
+    <div class="bg-white rounded-2xl card-shadow p-6" id="summary-section" style="display: none;">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold text-gray-800 flex items-center">
+          <span class="bg-green-100 text-green-600 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">📊</span>
+          สรุปผลคะแนนทั้ง 5 วิชา
+        </h2>
+        <button onclick="manualRefresh()" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-all flex items-center gap-2">
+          🔄 รีเฟรชข้อมูล
+        </button>
       </div>
+      
+      <div class="mb-4 space-y-2 sm:space-y-0 sm:flex sm:gap-2">
+        <button onclick="exportToCSV()" class="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-all">
+          📥 ส่งออก CSV
+        </button>
+        <button onclick="exportToExcel()" class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition-all">
+          📊 ส่งออก Excel
+        </button>
+        <button onclick="clearLocalStorage()" class="w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition-all">
+          🗑️ ลบข้อมูลทั้งหมด
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-green-500 text-white">
+              <th class="px-4 py-3 text-left">ลำดับ</th>
+              <th class="px-4 py-3 text-left">วันที่/เวลา</th>
+              <th class="px-4 py-3 text-left">ชื่อ-นามสกุล</th>
+              <th class="px-4 py-3 text-center">ชั้น</th>
+              <th class="px-4 py-3 text-center">เลขที่</th>
+              <th class="px-4 py-3 text-left">รายวิชา</th>
+              <th class="px-4 py-3 text-center">คะแนน</th>
+              <th class="px-4 py-3 text-center">ถูก/ผิด</th>
+            </tr>
+          </thead>
+          <tbody id="summary-tbody">
+            <tr>
+              <td colspan="8" class="text-center py-8 text-gray-500">กำลังโหลดข้อมูล...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <button onclick="backToSubjects()" class="mt-6 w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+        🏠 กลับหน้าหลัก
+      </button>
     </div>
 
     <!-- Student Dashboard Section -->
-    <div id="student-dashboard-section" style="display: none;">
-      <div class="bg-white rounded-2xl card-shadow p-6 mb-6">
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold text-gray-800 flex items-center">
-            <span class="bg-blue-100 text-blue-600 w-10 h-10 rounded-full flex items-center justify-center text-lg mr-3">👥</span> 
-            สถิติการสอบรายบุคคล
-          </h2>
-          <div class="flex gap-2">
-            <button onclick="backToSubjectSelection()" class="bg-gray-500 text-white px-4 py-2 rounded-xl hover:bg-gray-600 transition-colors">
-              ← กลับ
-            </button>
-            <button onclick="clearLocalStorage()" class="bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600 transition-colors">
-              🗑️ ลบข้อมูล
-            </button>
-          </div>
-        </div>
-
-        <!-- Search and Filter -->
-        <div class="mb-6 bg-blue-50 p-6 rounded-xl">
-          <div class="flex flex-col md:flex-row gap-4">
-            <div class="flex-1">
-              <label class="block text-sm font-medium text-gray-700 mb-2">🔍 ค้นหานักเรียน</label>
-              <input type="text" id="student-search" placeholder="ค้นหาด้วยชื่อ-นามสกุล หรือเลขที่" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" oninput="filterStudents()">
-            </div>
-            <div class="md:w-48">
-              <label class="block text-sm font-medium text-gray-700 mb-2">กรองตามชั้น</label>
-              <select id="class-filter" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" onchange="filterStudents()">
-                <option value="">ทุกชั้น</option>
-                <option value="ม.3/1">ม.3/1</option>
-                <option value="ม.3/2">ม.3/2</option>
-                <option value="ม.3/3">ม.3/3</option>
-                <option value="ม.3/4">ม.3/4</option>
-                <option value="ม.3/5">ม.3/5</option>
-                <option value="ม.3/6">ม.3/6</option>
-                <option value="ม.3/7">ม.3/7</option>
-                <option value="ม.3/8">ม.3/8</option>
-              </select>
-            </div>
-            <div class="md:w-48">
-              <label class="block text-sm font-medium text-gray-700 mb-2">เลือกวิชา</label>
-              <select id="subject-filter" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" onchange="filterStudents()">
-                <option value="">ทุกวิชา</option>
-                <option value="เครื่องหมายลูกเสือหลวง">วิชาที่ 1 - เครื่องหมายลูกเสือหลวง</option>
-                <option value="ผู้จัดการค่ายพักแรม">วิชาที่ 2 - ผู้จัดการค่ายพักแรม</option>
-                <option value="นักดาราศาสตร์">วิชาที่ 3 - นักดาราศาสตร์</option>
-                <option value="นักผจญภัย">วิชาที่ 4 - นักผจญภัย</option>
-                <option value="หัวหน้าคนครัว">วิชาที่ 5 - หัวหน้าคนครัว</option>
-                <option value="การอนุรักษ์ธรรมชาติ">วิชาที่ 6 - การอนุรักษ์ธรรมชาติ</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Students List -->
-        <div id="students-list" class="space-y-4">
-          <div class="text-center text-gray-500 py-8">
-            <div class="text-4xl mb-4">👥</div>
-            <p>ยังไม่มีข้อมูลนักเรียน</p>
-            <p class="text-sm">เมื่อมีนักเรียนทำแบบทดสอบแล้ว จะแสดงรายชื่อที่นี่</p>
-          </div>
-        </div>
+    <div class="bg-white rounded-2xl card-shadow p-6" id="student-dashboard-section" style="display: none;">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold text-gray-800 flex items-center">
+          <span class="bg-blue-100 text-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">👥</span>
+          สถิติรายบุคคล
+        </h2>
+        <button onclick="manualRefresh()" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-all flex items-center gap-2">
+          🔄 รีเฟรชข้อมูล
+        </button>
       </div>
+
+      <div class="mb-4">
+        <input type="text" id="student-search" placeholder="🔍 ค้นหานักเรียน (ชื่อ, ชั้น, เลขที่)" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-400 focus:outline-none transition-all" oninput="filterStudents()">
+      </div>
+
+      <div id="students-list" class="space-y-3">
+        <div class="text-center py-8 text-gray-500">กำลังโหลดข้อมูล...</div>
+      </div>
+
+      <button onclick="backToSubjects()" class="mt-6 w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+        🏠 กลับหน้าหลัก
+      </button>
     </div>
+  </div>
 
-    <!-- Student Detail Modal -->
-    <div id="student-detail-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-      <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-        <div class="p-6 border-b border-gray-200 sticky top-0 bg-white">
-          <div class="flex items-center justify-between">
-            <h3 class="text-xl font-bold text-gray-800" id="modal-student-name">รายละเอียดนักเรียน</h3>
-            <button onclick="closeStudentModal()" class="text-gray-500 hover:text-gray-700 text-2xl font-bold">×</button>
-          </div>
-        </div>
-        <div class="p-6" id="student-detail-content">
-          <!-- Content will be populated by JavaScript -->
-        </div>
+  <!-- Student Detail Modal -->
+  <div id="student-detail-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+    <div class="bg-white rounded-2xl p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-bold text-gray-800" id="modal-student-name"></h3>
+        <button onclick="closeStudentModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
       </div>
+      <div id="student-detail-content"></div>
     </div>
   </div>
 
   <script>
-    // Configuration
-    const SHEET_ID = '1e0gA_eChEP5wllPMvPh2FAPjS8VwxnRwdTv8PAQkkKo';
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJnPgbTwFL1gc8-gdrsDIpqNb-beHgNFrGAKOmlIStM3F46t1hvZp7NF2R9BJvd5AjWA/exec';
-
-    const defaultConfig = {
-      exam_title: "แบบทดสอบลูกเสือสามัญรุ่นใหญ่ ม.3",
-      school_name: "โรงเรียนสา",
-      grade_level: "มัธยมศึกษาปีที่ 3"
-    };
-
-    // Quiz data for all subjects (ม.3 content)
-    const allSubjects = [
+    // ⚙️ ตั้งค่า Google Apps Script Web App URL
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw6fdeysx8dQSdoiOwnxzg2Y330qKcJOZa2tm_yndw0II2SZEWbto6hNhpaXpqMhFp9/exec';
+    
+    // 🗂️ ข้อมูลการสอบทั้งหมด
+    let allStudentsData = [];
+    
+    // 📚 ข้อมูลชุดข้อสอบทั้ง 5 วิชา
+    const subjects = [
       {
-        name: "เครื่องหมายลูกเสือหลวง",
-        icon: "🏅",
-        sheetName: "Sheet1",
+        name: 'เครื่องหมายลูกเสือชั้นพิเศษ',
+        sheet: 'Sheet1',
         questions: [
           {
-            question: "1. เครื่องหมายลูกเสือหลวงมีลักษณะตามข้อใด",
-            options: [
-              "รูปสี่เหลี่ยมจัตุรัส ขนาดด้านละ 3 เซนติเมตร พื้นสีกากีขอบสีขาว มีรูปพระมหามงกุฎสีทองอยู่ตรงกลาง และมีตราคณะลูกเสือแห่งชาติสีขาวอยู่เบื้องล่างพระมงกุฎ",
-              "รูปสามเหลี่ยม รูปสี่เหลี่ยมจัตุรัส ขนาดด้านละ 3 เซนติเมตรพื้นสีกากี ขอบสีขาว มีรูปพระมหามงกุฏสีทอง อยู่ตรงกลาง และมีตราคณะลูกเสือแห่งชาติสีขาวอยู่เบื้องล่างพระมงกุฎ",
-              "รูปวงรี รูปสี่เหลี่ยมจัตุรัส ขนาดด้านละ 3 เซนติเมตรพื้นสีกากี ขอบสีขาว มีรูปพระมหามงกุฎสีทองอยู่ตรงกลาง และมีตราคณะลูกเสือแห่งชาติสีขาวอยู่เบื้องล่างพระมงกุฎ",
-              "รูปโล่ รูปสี่เหลี่ยมจัตุรัส ขนาดด้านละ 3 เซนติเมตรพื้นสีกากีขอบสีขาวมีรูปพระมหามงกุฏสีทองอยู่ตรงกลาง และมีตราคณะลูกเสือแห่งชาติสีขาวอยู่เบื้องล่าง พระมงกุฎ"
-            ],
+            question: "เครื่องหมายลูกเสือสามัญรุ่นใหญ่ชั้นสามัญ มีกี่สี",
+            options: ["1 สี", "2 สี", "3 สี", "4 สี"],
+            correct: 2
+          },
+          {
+            question: "สีของเครื่องหมายลูกเสือสามัญรุ่นใหญ่ชั้นสามัญ มีสีอะไรบ้าง",
+            options: ["เหลือง เขียว", "แดง ขาว น้ำเงิน", "เหลือง เขียว แดง", "เหลือง เขียว น้ำเงิน"],
             correct: 0
           },
           {
-            question: "2. ผู้ที่เข้าเกณฑ์มีสิทธิ์สอบเครื่องหมายลูกเสือหลวง",
-            options: [
-              "ได้รับเครื่องหมายลูกเสือเอก",
-              "ได้รับเครื่องหมายลูกเสือโลก",
-              "ได้รับเครื่องหมายลูกเสือชั้นพิเศษ",
-              "ถูกทุกข้อ"
-            ],
-            correct: 3
-          },
-          {
-            question: "3. วิชาพื้นฐานในระดับลูกเสือชั้นพิเศษ 3 วิชา ได้แก่",
-            options: [
-              "หน้าที่พลเมือง การเดินสํารวจ บริการ",
-              "หน้าที่พลเมือง สิ่งแวดล้อม สมรรถภาพทางกาย",
-              "การเดินทางสํารวจ บริการ กิจกรรมที่สนใจเป็นพิเศษ",
-              "การเดินทางสํารวจ บริการ อุดมคติ"
-            ],
+            question: "เครื่องหมายชั้นพิเศษชุดที่ 1 มีกี่กิจกรรม",
+            options: ["3 กิจกรรม", "4 กิจกรรม", "5 กิจกรรม", "6 กิจกรรม"],
             correct: 1
           },
           {
-            question: "4. ข้อใดคือวิชาบริการในกองลูกเสือในระดับเครื่องหมายลูกเสือหลวง",
-            options: [
-              "ช่วยบริการงานบ้านของตน เป็นเวลา 6 เดือน",
-              "ช่วยดําเนินการในกองลูกเสือสํารองหรือสามัญเป็นเวลา 6 เดือน",
-              "ช่วยบริการงานของกองลูกเสือ เป็นเวลา 6 เดือน",
-              "ช่วยบริการงานของสถานศึกษา เป็นเวลา 6 เดือน"
-            ],
-            correct: 2
-          },
-          {
-            question: "5. ข้อใดคือวิชาบริการในชุมชนในระดับเครื่องหมายลูกเสือหลวง",
-            options: [
-              "บริการพัฒนาชุมชน รวม 20 ชั่วโมง เป็นเวลา 6 เดือน",
-              "บริการพัฒนาชุมชน รวม 15 ชั่วโมง เป็นเวลา 5 เดือน",
-              "บริการพัฒนาชุมชน รวม 5 ชั่วโมง เป็นเวลา 2 เดือน",
-              "บริการพัฒนาชุมชน รวม 10 ชั่วโมง เป็นเวลา 4 เดือน"
-            ],
+            question: "เครื่องหมายชั้นพิเศษชุดที่ 1 ให้ติดไว้ที่ใด",
+            options: ["แขนเสื้อซ้าย", "แขนเสื้อขวา", "อกซ้าย", "อกขวา"],
             correct: 0
           },
           {
-            question: "6. สอบวิชาพื้นฐานในระดับลูกเสือหลวง จํานวน 3 วิชา",
-            options: [
-              "สิ่งแวดล้อม อุดมคติ กิจกรรมที่สนใจเป็นกรณีพิเศษ",
-              "ผจญภัย บุกเบิก เดินทางไกล",
-              "ยิงปืน แผนที่ทหารและเข็มทิศ อนุรักษ์ธรรมชาติ",
-              "เดินทางไกล แผนที่ทหารและเข็มทิศ อนุรักษ์ธรรมชาติ"
-            ],
-            correct: 3
-          },
-          {
-            question: "7. วิชาพื้นฐานหน้าที่พลเมืองระดับเครื่องหมายหลวง",
-            options: [
-              "รู้นโยบายของรัฐบาลไทยในปัจจุบันเกี่ยวกับการท่องเที่ยว",
-              "รู้นโยบายของรัฐบาลไทยในปัจจุบันเกี่ยวกับเศรษฐกิจ",
-              "นโยบายของรัฐบาลไทยในปัจจุบันเกี่ยวกับการปกครอง",
-              "นโยบายของรัฐบาลไทยในปัจจุบันเกี่ยวกับต่างประเทศ"
-            ],
-            correct: 2
-          },
-          {
-            question: "8. วิชาพื้นฐานหน้าที่พลเมืองในกองลูกเสือ ระดับเครื่องหมายหลวง",
-            options: [
-              "รับหน้าที่เป็นกรรมการหมู่บ้าน",
-              "รับหน้าที่เป็นกรรมการห้องสมุดโรงเรียน",
-              "รับหน้าที่เป็นกรรมการสหกรณ์โรงเรียน",
-              "รับหน้าที่เป็นกรรมการกองลูกเสือหรือกรรมการโรงเรียน"
-            ],
-            correct: 3
-          },
-          {
-            question: "9. วิชาพื้นฐานสิ่งแวดล้อมระดับเครื่องหมายลูกเสือหลวง",
-            options: [
-              "มีส่วนเกี่ยวข้องกับโครงการกําจัดผักตบชวา",
-              "มีส่วนเกี่ยวข้องกับโครงการกําจัดขยะมูลฝอย",
-              "มีส่วนเกี่ยวข้องกับโครงการอนุรักษ์ธรรมชาติ",
-              "ถูกทุกข้อ"
-            ],
-            correct: 3
-          },
-          {
-            question: "10. การเดินทางสํารวจระดับเครื่องหมายลูกเสือหลวง",
-            options: [
-              "เดินทางสํารวจใช้เวลาอย่างน้อย 1 วัน",
-              "เดินทางสํารวจใช้เวลาอย่างน้อย 2 วัน 1 คืน",
-              "เดินทางสํารวจใช้เวลาอย่างน้อย 3 วัน 2 คืน",
-              "เดินทางสํารวจใช้เวลาอย่างน้อย 4 วัน 3 คืน"
-            ],
-            correct: 2
-          },
-          {
-            question: "11. การขี่จักรยานระดับเครื่องหมายลูกเสือหลวง",
-            options: [
-              "ขี่รถจักรยานเป็นระยะทาง 30 - 50 กิโลเมตร",
-              "ขี่รถจักรยานเป็นระยะทาง 40 - 60 กิโลเมตร",
-              "ขี่รถจักรยานเป็นระยะทาง 50 - 70 กิโลเมตร",
-              "ขี่รถจักรยานเป็นระยะทาง 60 - 80 กิโลเมตร"
-            ],
-            correct: 2
-          },
-          {
-            question: "12. การแสดงออกทางศิลปะในระดับเครื่องหมายลูกเสือหลวง",
-            options: [
-              "แสดงงานศิลปะในที่สาธารณะ",
-              "แสดงงานศิลปะในงานแสดงสินค้า",
-              "แสดงงานศิลปะในชุมชน",
-              "แสดงงานศิลปะในสถานศึกษา"
-            ],
-            correct: 0
-          },
-          {
-            question: "13. สมรรถภาพทางกายในระดับเครื่องหมายลูกเสือหลวง",
-            options: [
-              "บริหารร่างกายเป็นเวลา 4 เดือน",
-              "บริหารร่างกายเป็นเวลา 5 เดือน",
-              "บริหารร่างกายเป็นเวลา 6 เดือน",
-              "บริหารร่างกายเป็นเวลา 7 เดือน"
-            ],
-            correct: 2
-          },
-          {
-            question: "14. อุดมคติระดับเครื่องหมายลูกเสือหลวง",
-            options: [
-              "อธิบายได้ว่าคําปฏิญาณและกฎนําไปปฏิบัติได้อย่างไร",
-              "อธิบายได้ว่าคําปฏิญาณและกฏมีความหมายอย่างไร",
-              "อธิบายได้ว่าคําปฏิญาณและกฏมีความสําคัญอย่างไร",
-              "อธิบายได้ว่าคําปฏิญาณและกฎของลูกเสือสอดคล้องกับศาสนาของตนอย่างไร"
-            ],
-            correct: 3
-          },
-          {
-            question: "15. กิจกรรมที่สนใจเป็นพิเศษระดับเครื่องหมายลูกเสือหลวง",
-            options: [
-              "สามารถแสดงผลงานที่ตนสนใจ",
-              "สามารถแสดงผลงานที่เป็นประโยชน์ต่อส่วนรวม",
-              "สามารถแสดงผลงานที่ยากลําบาก",
-              "สามารถแสดงผลงานและชี้แจงให้กรรมการสอบเข้าใจ"
-            ],
-            correct: 3
-          },
-          {
-            question: "16. วิชาการเป็นผู้นํา",
-            options: [
-              "การเป็นผู้นํา - ผู้ตามที่ดี",
-              "คุณสมบัติของผู้นํา",
-              "เกมผู้นํา - ผู้ตาม",
-              "ระเบียบแถว สัญญาณมือสากล กิจกรรมผจญภัย"
-            ],
+            question: "ชื่อเครื่องหมายชั้นพิเศษชุดที่ 1 คืออะไร",
+            options: ["นักสะกดรอย", "นักบุกเบิก", "นักสอบคนไข้", "นักบ้านและสวนครัว"],
             correct: 1
           },
           {
-            question: "17. ผู้อนุมัติผลเครื่องหมายลูกเสือหลวง",
-            options: [
-              "คณะกรรมการบริหารลูกเสือแห่งชาติ",
-              "ประธานคณะกรรมการบริหารลูกเสือแห่งชาติ",
-              "เลขาธิการสํานักงานลูกเสือแห่งชาติ",
-              "ผู้อํานวยการลูกเสือจังหวัด"
-            ],
-            correct: 0
-          },
-          {
-            question: "18. ผู้ลงนามในประกาศนียบัตรเครื่องหมายลูกเสือหลวง",
-            options: [
-              "คณะกรรมการบริหารลูกเสือแห่งชาติ",
-              "ประธานคณะกรรมการบริหารลูกเสือแห่งชาติ",
-              "เลขาธิการสํานักงานลูกเสือแห่งชาติ",
-              "ผู้อํานวยการลูกเสือจังหวัด"
-            ],
+            question: "เครื่องหมายชั้นพิเศษชุดที่ 2 มีกี่กิจกรรม",
+            options: ["3 กิจกรรม", "4 กิจกรรม", "5 กิจกรรม", "6 กิจกรรม"],
             correct: 1
           },
           {
-            question: "19. เครื่องหมายชั้นสูงสุดของลูกเสือ เนตรนารี สามัญรุ่นใหญ่",
-            options: [
-              "เครื่องหมายลูกเสือสัมพันธ์",
-              "เครื่องหมายวชิราวุธ",
-              "เครื่องหมายสายยงยศ",
-              "เครื่องหมายลูกเสือหลวง"
-            ],
+            question: "เครื่องหมายชั้นพิเศษชุดที่ 2 ให้ติดไว้ที่ใด",
+            options: ["แขนเสื้อซ้าย", "แขนเสื้อขวา", "อกซ้าย", "อกขวา"],
+            correct: 1
+          },
+          {
+            question: "ชื่อเครื่องหมายชั้นพิเศษชุดที่ 2 คืออะไร",
+            options: ["นักสะกดรอย", "นักบุกเบิก", "นักสอบคนไข้", "นักบ้านและสวนครัว"],
+            correct: 0
+          },
+          {
+            question: "เครื่องหมายชั้นพิเศษชุดที่ 3 มีกี่กิจกรรม",
+            options: ["3 กิจกรรม", "4 กิจกรรม", "5 กิจกรรม", "6 กิจกรรม"],
+            correct: 2
+          },
+          {
+            question: "เครื่องหมายชั้นพิเศษชุดที่ 3 ให้ติดไว้ที่ใด",
+            options: ["แขนเสื้อซ้าย", "แขนเสื้อขวา", "อกซ้าย", "อกขวา"],
+            correct: 2
+          },
+          {
+            question: "ชื่อเครื่องหมายชั้นพิเศษชุดที่ 3 คืออะไร",
+            options: ["นักสะกดรอย", "นักบุกเบิก", "นักสอบคนไข้", "นักบ้านและสวนครัว"],
             correct: 3
           },
           {
-            question: "20. การประดับเครื่องหมายลูกเสือหลวง",
-            options: [
-              "กึ่งกลางกระเป๋าเสื้อด้านซ้ายคู่กับเครื่องหมายลูกเสือโลก",
-              "กึ่งกลางกระเป๋าเสื้อข้างขวาแทนเครื่องหมายลูกเสือชั้นพิเศษ",
-              "กึ่งกลางกระเป๋าเสื้อข้างขวาคู่กับเครื่องหมายลูกเสือชั้นพิเศษ",
-              "ติดที่ไหล่ขวา"
-            ],
+            question: "เครื่องหมายชั้นพิเศษชุดที่ 4 มีกี่กิจกรรม",
+            options: ["3 กิจกรรม", "4 กิจกรรม", "5 กิจกรรม", "6 กิจกรรม"],
+            correct: 1
+          },
+          {
+            question: "เครื่องหมายชั้นพิเศษชุดที่ 4 ให้ติดไว้ที่ใด",
+            options: ["แขนเสื้อซ้าย", "แขนเสื้อขวา", "อกซ้าย", "อกขวา"],
+            correct: 3
+          },
+          {
+            question: "ชื่อเครื่องหมายชั้นพิเศษชุดที่ 4 คืออะไร",
+            options: ["นักสะกดรอย", "นักบุกเบิก", "นักสอบคนไข้", "นักบ้านและสวนครัว"],
+            correct: 2
+          },
+          {
+            question: "เครื่องหมายชั้นพิเศษชุดที่ 5 มีกี่กิจกรรม",
+            options: ["3 กิจกรรม", "4 กิจกรรม", "5 กิจกรรม", "6 กิจกรรม"],
+            correct: 3
+          },
+          {
+            question: "เครื่องหมายชั้นพิเศษชุดที่ 5 ให้ติดไว้ที่ใด",
+            options: ["แขนเสื้อซ้าย", "แขนเสื้อขวา", "อกซ้าย", "อกขวา"],
+            correct: 2
+          },
+          {
+            question: "ชื่อเครื่องหมายชั้นพิเศษชุดที่ 5 คืออะไร",
+            options: ["นักพาหนะ", "หน้าที่พลเมือง", "ผู้พิทักษ์ป่า", "นักสื่อสาร"],
+            correct: 1
+          },
+          {
+            question: "เครื่องหมายชั้นพิเศษชุดที่ 6 มีกี่กิจกรรม",
+            options: ["3 กิจกรรม", "4 กิจกรรม", "5 กิจกรรม", "6 กิจกรรม"],
+            correct: 2
+          },
+          {
+            question: "เครื่องหมายชั้นพิเศษชุดที่ 6 ให้ติดไว้ที่ใด",
+            options: ["แขนเสื้อซ้าย", "แขนเสื้อขวา", "อกซ้าย", "อกขวา"],
+            correct: 3
+          },
+          {
+            question: "ชื่อเครื่องหมายชั้นพิเศษชุดที่ 6 คืออะไร",
+            options: ["นักพาหนะ", "หน้าที่พลเมือง", "ผู้พิทักษ์ป่า", "นักสื่อสาร"],
             correct: 2
           }
         ]
       },
       {
-        name: "ผู้จัดการค่ายพักแรม",
-        icon: "🏕️",
-        sheetName: "Sheet2",
+        name: 'หน้าที่พลเมือง',
+        sheet: 'Sheet2',
         questions: [
           {
-            question: "1. ข้อใดไม่ใช่วัตถุประสงค์ในการไปอยู่ค่ายพักแรม",
-            options: [
-              "ทดสอบความแข็งแรงของร่างกาย",
-              "เพื่อเพิ่มพูนประสบการณ์ชีวิต",
-              "เพื่อศึกษาธรรมชาติ",
-              "เพื่อความเพลิดเพลิน"
-            ],
-            correct: 3
-          },
-          {
-            question: "2. สิ่งแรกที่ควรทำในการเตรียมสิ่งของไปอยู่ค่ายพักแรม คืออะไร",
-            options: [
-              "สอบถามราคาสินค้า",
-              "ทำรายการสิ่งของที่จะใช้",
-              "จัดทำรายการอาหาร",
-              "ทดลองการกางเต็นท์"
-            ],
-            correct: 1
-          },
-          {
-            question: "3. ข้อใดไม่ใช่หลักเกณฑ์การเลือกเครื่องหลัง",
-            options: [
-              "มีรูปแบบทันสมัย",
-              "มีขนาดพอเหมาะ",
-              "ทนทานกันน้ำได้",
-              "บรรจุสิ่งของได้มาก"
-            ],
-            correct: 0
-          },
-          {
-            question: "4. อุปกรณ์ชิ้นใด เป็นของใช้ส่วนตัว",
-            options: [
-              "หม้อ",
-              "พลั่ว",
-              "แปรงสีฟัน",
-              "แผนที่"
-            ],
+            question: "พระบรมราโชบายหรือนโยบายของพระบาทสมเด็จพระเจ้าอยู่หัวรัชกาลที่ 10 มีกี่ข้อ",
+            options: ["8", "10", "12", "15"],
             correct: 2
           },
           {
-            question: "5. ข้อใดเป็นหลักเกณฑ์การบรรจุเครื่องหลัง",
-            options: [
-              "ของชิ้นเล็ก ๆ วางกระจายไว้ทุกส่วน",
-              "ของที่ใช้บ่อย ๆ ต้องแขวนไว้",
-              "ของทุกอย่างวางเป็นระเบียบ",
-              "ของหนักเอาไว้ด้านบน"
-            ],
-            correct: 2
-          },
-          {
-            question: "6. อุปกรณ์ส่วนกลางของหมู่มอบหมายให้ใครเป็นผู้ขนย้าย",
-            options: [
-              "ลูกหมู่ทุกคน",
-              "นายหมู่",
-              "รองนายหมู่",
-              "ลูกหมู่บางคน"
-            ],
+            question: "ในการดำรงชีวิตควรประพฤติตนตามหลักปรัชญาของเศรษฐกิจพอเพียง คือข้อใด",
+            options: ["พอใจตามความต้องการจากแรงเริงของบุคคล", "ให้ผู้อื่นมีความทุกข์เพื่อความสุขของตนเอง", "พออยู่พอกิน พอมีพอใช้ ดังนี้ถือว่าเป็นคนไม่มีความก้าวหน้า", "พอประมาณ มีเหตุผล คิดการณ์ใกล้และไกล สร้างภูมิคุ้มกันที่ดีในตัวได้"],
             correct: 3
           },
           {
-            question: "7. สิ่งของชิ้นใด ไม่จำเป็นต้องนำไปในการอยู่ค่ายพักแรม",
-            options: [
-              "ไฟฉาย",
-              "วิทยุ",
-              "มีดพับ",
-              "เข็มทิศ"
-            ],
-            correct: 1
-          },
-          {
-            question: "8. ข้อใดเป็นการกระทำที่ถูกต้องเหมาะสม",
-            options: [
-              "นำกระทะบรรจุลงเป้เป็นอันดับแรก",
-              "เอายาบรรจุไว้ที่ด้านล่างของเป้",
-              "แยกแปรงและยาสีฟันเก็บคนละที่",
-              "จัดผ้าห่มไว้ที่ด้านติดกับหลัง"
-            ],
-            correct: 3
-          },
-          {
-            question: "9. สิ่งของชิ้นใดที่ควรบรรจุไว้บนสุดในเครื่องหลัง",
-            options: [
-              "แผนที่",
-              "แก้วน้ำ",
-              "อาหารกระป๋อง",
-              "รองเท้าแตะ"
-            ],
+            question: "คำไทยที่แปลตรงตัวกับคำว่า \"democracy\" คือข้อใด",
+            options: ["ประชาธิปไตย", "ราชาธิปไตย", "เผด็จการ", "ประชาธิปัตย์"],
             correct: 0
           },
           {
-            question: "10. เครื่องปัจจุบันพยาบาล ควรจัดวางไว้บริเวณใดของเครื่องหลัง",
-            options: [
-              "ด้านบนสุดเพราะหยิบได้ง่าย",
-              "ด้านข้างเพราะจะไม่ถูกกระแทก",
-              "ด้านล่างสุด เพราะจะได้ไม่สูญหาย",
-              "ตรงส่วนใดก็ได้"
-            ],
+            question: "ถ้ามีกลุ่มคนส่วนน้อยควบคุมอำนาจรัฐทั้งหมดและบริหารประเทศตามอำเภอใจ การปกครองในลักษณะนี้เรียกว่าอะไร",
+            options: ["ระบอบเผด็จการ", "ระบอบประชาธิปไตย", "ระบอบกษัตริย์", "ระบอบสังคมนิยม"],
             correct: 0
           },
           {
-            question: "11. ปัจจุบัน วัสดุใดที่นิยมนำมาใช้แทนหลุมแห้ง หลุมเปียก",
-            options: [
-              "ถุงดำ",
-              "กระสอบ",
-              "กองไว้ข้างๆ",
-              "ถังน้ำพลาสติก"
-            ],
-            correct: 3
+            question: "จุดมุ่งหมายสำคัญของระบอบประชาธิปไตยคืออะไร",
+            options: ["เพื่อความสุข ความเจริญและสันติภาพของประชาชนและรัฐ", "เพื่อให้เจ้าหน้าที่มีอำนาจเด็ดขาดในการปกครอง", "เพื่อให้มีการเลือกตั้ง", "เพื่อให้มีการแบ่งแยกชนชั้น"],
+            correct: 0
           },
           {
-            question: "12. อุปกรณ์ใดไม่มีความจำเป็นต้องใช้ในการสร้างค่ายพักแรม",
-            options: [
-              "มีด",
-              "เสียม",
-              "กล่องแช่เย็น",
-              "เชือก"
-            ],
+            question: "รัฐธรรมนูญแห่งราชอาณาจักรไทย พ.ศ. 2560 มีจำนวนกี่มาตรา",
+            options: ["250 มาตรา", "270 มาตรา", "279 มาตรา", "300 มาตรา"],
             correct: 2
           },
           {
-            question: "13. เต็นท์ที่เหมาะสำหรับลูกเสือและเนตรนารี ควรมีลักษณะใด",
-            options: [
-              "สวยงามราคาแพง",
-              "กางประกอบง่ายและใช้พื้นที่น้อย",
-              "มีขนาดใหญ่พักได้หลาย ๆ คน",
-              "ผ้าใบต้องหนาและทนทาน"
-            ],
+            question: "ระบอบการปกครองประเทศไทยปัจจุบัน คือข้อใด",
+            options: ["ระบอบเผด็จการ", "ระบอบประชาธิปไตยอันมีพระมหากษัตริย์ทรงเป็นประมุข", "ระบอบสังคมนิยม", "ระบอบคอมมิวนิสต์"],
             correct: 1
           },
           {
-            question: "14. การอยู่ค่ายพักแรมร่วมกัน ควรคำนึงถึงสิ่งใด",
-            options: [
-              "ความสะดวกสบาย",
-              "สะอาดและปลอดภัย",
-              "มีความลำบากและยุ่งยาก",
-              "ไม่มีข้อถูก"
-            ],
+            question: "ประเทศไทยมีการใช้ธงชาติครั้งแรกเมื่อใด",
+            options: ["ในรัชสมัยของพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว", "ในรัชสมัยของพระบาทสมเด็จพระมงกุฎเกล้าเจ้าอยู่หัว", "ในรัชสมัยของพระบาทสมเด็จพระปกเกล้าเจ้าอยู่หัว", "ในรัชสมัยของพระบาทสมเด็จพระเจ้าอยู่หัวอานันทมหิดล"],
+            correct: 0
+          },
+          {
+            question: "ธงชาติไทยที่ใช้อยู่ในปัจจุบัน ประกอบด้วยสีอะไรบ้าง",
+            options: ["แดง ขาว น้ำเงิน", "แดง เหลือง น้ำเงิน", "เขียว ขาว แดง", "เหลือง เขียว แดง"],
+            correct: 0
+          },
+          {
+            question: "ความหมายของแถบสีน้ำเงินในธงชาติไทยหมายถึงอะไร",
+            options: ["ความสามัคคี", "พระมหากษัตริย์", "พุทธศาสนา", "ชาติไทย"],
             correct: 1
           },
           {
-            question: "15. การอยู่ค่ายพักแรมหมายถึงข้อใด",
-            options: [
-              "การเดินทางเป็นกลุ่มเพื่อไปนอนพักตามรีสอร์ท",
-              "การเดินทางไปพักแรมค้างคืนตามสถานที่ต่าง ๆ",
-              "การไปพักบ้านเพื่อน",
-              "การไปพักค้างคืนตามโรงแรม"
-            ],
+            question: "เพลงชาติไทยที่ใช้อยู่ในปัจจุบัน ใครเป็นผู้แต่งเนื้อร้อง",
+            options: ["พระเจนดุริยางค์", "หลวงสารานุประพันธ์", "จมื่น สายัณห์สุวรรณ", "นายปิติ วาทยะกร"],
             correct: 1
           },
           {
-            question: "16. การเลือกเต็นท์ ควรเลือกวัสดุใดมาสร้าง",
-            options: [
-              "ผ้ายางที่กันน้ำได้",
-              "หญ้าคาที่ป้องกันน้ำหรือแดดได้",
-              "เต็นท์สำเร็จรูป สะดวกและง่าย",
-              "ถูกทุกข้อ"
-            ],
-            correct: 3
+            question: "เพลงชาติไทยที่ใช้อยู่ในปัจจุบัน ใครเป็นผู้แต่งทำนอง",
+            options: ["พระเจนดุริยางค์", "หลวงสารานุประพันธ์", "จมื่น สายัณห์สุวรรณ", "นายปิติ วาทยะกร"],
+            correct: 0
           },
           {
-            question: "17. ข้อควรปฏิบัติในการเก็บเต็นท์พักแรม คือข้อใด",
-            options: [
-              "ม้วนเก็บไว้ในกล่อง",
-              "เก็บไว้ในที่มิดชิด",
-              "ควรซักด้วยน้ำทุกครั้ง",
-              "ทำความสะอาดก่อนพับเก็บให้เรียบร้อย"
-            ],
-            correct: 3
+            question: "เพลงสรรเสริญพระบารมีที่ใช้อยู่ในปัจจุบัน ใครเป็นผู้แต่ง",
+            options: ["พระเจนดุริยางค์", "หม่อมเจ้าหญิงลักษมีลาวัณ", "เจ้าพระยาศรีสุริยวงศ์", "พระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว"],
+            correct: 2
           },
           {
-            question: "18. ข้อใดเป็นสถานที่ ที่ไม่เหมาะสมในการตั้งค่ายพักแรม",
-            options: [
-              "ที่โล่งกว้าง",
-              "ที่ราบลุ่มใกล้แม่น้ำใหญ่",
-              "การคมราคมสะดวก",
-              "ใกล้ต้นไม้ใหญ่เพื่อให้ร่มเงา"
-            ],
+            question: "ชื่อเดิมของเพลงสรรเสริญพระบารมีเรียกว่าอะไร",
+            options: ["เพลงสรรเสริญพระบารมี", "เพลงสดุดีจอมราชา", "เพลงชาติไทย", "บทปลุกใจชาวไทย"],
             correct: 1
           },
           {
-            question: "19. สิ่งใดไม่จำเป็นในการสร้างค่ายพักแรม",
-            options: [
-              "หลุมแห้ง หลุมเปียก",
-              "เตาไฟ",
-              "ส้วม",
-              "โต๊ะนั่งเล่น"
-            ],
-            correct: 3
+            question: "ดอกไม้ประจำชาติไทยคือดอกอะไร",
+            options: ["ดอกกุหลาบ", "ดอกบัว", "ดอกราชพฤกษ์", "ดอกดาวเรือง"],
+            correct: 2
           },
           {
-            question: "20. เต็นท์แบบใดต่อไปนี้ไม่ใช่เต็นท์ที่เหมาะสำหรับค่ายพักแรม",
-            options: [
-              "เต็นท์กระแบะ",
-              "เต็นท์อย่างง่าย",
-              "เต็นท์แบบกระโจม",
-              "เต็นท์แบบโดม"
-            ],
+            question: "ต้นไม้ประจำชาติไทยคือต้นอะไร",
+            options: ["ต้นไทร", "ต้นรัก", "ต้นจามจุรี", "ต้นราชพฤกษ์"],
+            correct: 1
+          },
+          {
+            question: "สัตว์ประจำชาติไทยคืออะไร",
+            options: ["ช้าง", "เสือ", "ม้า", "สิงโต"],
+            correct: 0
+          },
+          {
+            question: "กีฬาประจำชาติไทยคืออะไร",
+            options: ["ตะกร้อ", "มวยไทย", "กรีฑา", "เซปักตะกร้อ"],
+            correct: 1
+          },
+          {
+            question: "ผลไม้ประจำชาติไทยคืออะไร",
+            options: ["ทุเรียน", "มะม่วง", "ลำไย", "มังคุด"],
+            correct: 0
+          },
+          {
+            question: "ศาสนาประจำชาติไทยคืออะไร",
+            options: ["พุทธ", "คริสต์", "อิสลาม", "ฮินดู"],
             correct: 0
           }
         ]
       },
       {
-        name: "นักดาราศาสตร์",
-        icon: "⭐",
-        sheetName: "Sheet3",
+        name: 'นักบุกเบิก',
+        sheet: 'Sheet3',
         questions: [
           {
-            question: "1. เครื่องหมายของวิชานักดาราศาสตร์เป็นรูปใด",
-            options: [
-              "ดวงอาทิตย์",
-              "ดวงจันทร์",
-              "ดาว 5 แฉก",
-              "กลุ่มดาวหมี"
-            ],
+            question: "เครื่องหมายนักบุกเบิกมีรูปร่างเป็นอย่างไร",
+            options: ["รูปวงกลม", "รูปสี่เหลี่ยมจัตุรัส", "รูปสามเหลี่ยมหน้าจั่ว", "รูปดาว"],
             correct: 2
           },
           {
-            question: "2. ใครเป็นผู้ตั้งทฤษฎีว่า ดวงอาทิตย์เป็นศูนย์กลาง",
-            options: [
-              "เซอร์ไอแซค นิวตัน",
-              "โจฮานส์ แคปเลอร์",
-              "กาลิเลโอ",
-              "นิโคลัส โคเปอร์นิคัส"
-            ],
-            correct: 3
-          },
-          {
-            question: "3. ดาวเคราะห์มีลักษณะอย่างไร",
-            options: [
-              "มองด้วยตาเปล่าไม่เห็น",
-              "ไม่มีแสงสว่างในตัวเอง",
-              "มีแสงสว่างในตัวเอง",
-              "ไม่มีข้อใดถูก"
-            ],
+            question: "เครื่องหมายนักบุกเบิกมีสีอะไร",
+            options: ["แดง", "เขียว", "น้ำเงิน", "เหลือง"],
             correct: 1
           },
           {
-            question: "4. ฤดูในประเทศไทยที่เหมาะแก่การศึกษากลุ่มดาว",
-            options: [
-              "ฤดูฝน",
-              "ฤดูร้อน",
-              "ฤดูหนาว",
-              "ทุกฤดู"
-            ],
-            correct: 2
-          },
-          {
-            question: "5. กาแล็กซี หมายถึง",
-            options: [
-              "เขตที่มีกลุ่มดาว",
-              "เขตที่มีวัตถุท้องฟ้าทั้งหลาย รวมกัน",
-              "เขตที่มีกลุ่มดาวฤกษ์",
-              "ไม่มีข้อถูก"
-            ],
-            correct: 1
-          },
-          {
-            question: "6. กาแล็กซี ประกอบด้วย",
-            options: [
-              "ดาวฤกษ์ กลุ่มดาว และกระจุกดาว",
-              "ที่ว่าง",
-              "ฝุ่น หรือธุลีคอสมิค",
-              "ถูกทุกข้อ"
-            ],
-            correct: 3
-          },
-          {
-            question: "7. กาแล็กซี ของเรามีรูปร่างอย่างไร",
-            options: [
-              "คล้ายไข่ดาว",
-              "คล้ายหัวม้า",
-              "คล้ายเลนซ์นูน",
-              "ผิดทุกข้อ"
-            ],
-            correct: 2
-          },
-          {
-            question: "8. กล้องโทรทรรศน์ของท้องฟ้าจำลองกรุงเทพมหานคร มีลักษณะอย่างไร",
-            options: [
-              "มีเลนส์หน้ากล้องขนาดเส้นผ่าศูนย์กลาง 150 มม.",
-              "มีเลนส์หน้ากล้องขนาดเส้นผ่าศูนย์กลาง 100 มม.",
-              "มีเลนส์หน้ากล้องขนาดเส้นผ่าศูนย์กลาง 200 มม.",
-              "ไม่มีข้อถูก"
-            ],
-            correct: 1
-          },
-          {
-            question: "9. อะไรเป็นหน้าที่ของ Analemmatic Sundial",
-            options: [
-              "วัดระยะทาง",
-              "บอกเวลา",
-              "บอกวันเดือนปี",
-              "ดูดาว"
-            ],
-            correct: 1
-          },
-          {
-            question: "10. ทฤษฎีใดกล่าวว่า เป็นจุดเอกฐานที่จุดนี้มีความหนาแน่นอนันต์ และอุณหภูมิสูงอนันต์",
-            options: [
-              "Big Bang",
-              "Black Hole",
-              "White Hole",
-              "ไม่มีข้อถูก"
-            ],
+            question: "เครื่องหมายนักบุกเบิกให้ติดที่ใด",
+            options: ["แขนเสื้อซ้าย", "แขนเสื้อขวา", "อกซ้าย", "อกขวา"],
             correct: 0
           },
           {
-            question: "11. ชื่อวันทั้งเจ็ดของไทย ตั้งชื่อมาจากอะไร",
-            options: [
-              "ชื่อของเทพเจ้า",
-              "ชื่อของกษัตริย์",
-              "ชื่อดวงดาว",
-              "ชื่อพระพุทธเจ้า"
-            ],
-            correct: 2
-          },
-          {
-            question: "12. ชื่อวันทั้งเจ็ดของไทย ตั้งชื่อมาจากดวงดาวบนท้องฟ้า วันใดตั้งชื่อมาจากดวงอาทิตย์",
-            options: [
-              "วันจันทร์",
-              "วันอังคาร",
-              "วันอาทิตย์",
-              "วันพฤหัสบดี"
-            ],
-            correct: 2
-          },
-          {
-            question: "13. วันใดตั้งชื่อมาจากดาวเคราะห์ที่ใหญ่ที่สุด",
-            options: [
-              "วันอาทิตย์",
-              "วันจันทร์",
-              "วันพุธ",
-              "วันพฤหัสบดี"
-            ],
-            correct: 3
-          },
-          {
-            question: "14. วันใดตั้งชื่อมาจากดาวเคราะห์ที่เรียกว่า ดาวประจำเมือง หรือดาวประกายพรึก",
-            options: [
-              "วันจันทร์",
-              "วันอังคาร",
-              "วันศุกร์",
-              "วันเสาร์"
-            ],
-            correct: 2
-          },
-          {
-            question: "15. วันใดตั้งชื่อมาจากดาวเคราะห์ที่เรียกว่า ดาวเทพเจ้าแห่งสงคราม",
-            options: [
-              "วันจันทร์",
-              "วันอังคาร",
-              "วันศุกร์",
-              "วันเสาร์"
-            ],
+            question: "เครื่องหมายนักบุกเบิกมีกี่กิจกรรม",
+            options: ["3 กิจกรรม", "4 กิจกรรม", "5 กิจกรรม", "6 กิจกรรม"],
             correct: 1
           },
           {
-            question: "16. เดือนมกราคม ได้ชื่อมาจากกลุ่มดาวราศีใด",
-            options: [
-              "คนแบกหม้อน้ำ",
-              "แกะ",
-              "ปลา",
-              "แพะทะเล"
-            ],
-            correct: 2
-          },
-          {
-            question: "17. เดือนกุมภาพันธ์ ได้ชื่อมาจากกลุ่มดาวราศีใด",
-            options: [
-              "คนแบกหม้อน้ำ",
-              "แกะ",
-              "ปลา",
-              "แพะทะเล"
-            ],
+            question: "กิจกรรมที่ 1 ของเครื่องหมายนักบุกเบิก คืออะไร",
+            options: ["การผูกเงื่อน", "การใช้ขวาน", "การใช้เลื่อย", "การใช้มีด"],
             correct: 0
           },
           {
-            question: "18. เดือนมีนาคม ได้ชื่อมาจากกลุ่มดาวราศีใด",
-            options: [
-              "คนแบกหม้อน้ำ",
-              "แกะ",
-              "ปลา",
-              "แพะทะเล"
-            ],
-            correct: 1
-          },
-          {
-            question: "19. เดือนเมษายน ได้ชื่อมาจากกลุ่มดาวราศีใด",
-            options: [
-              "คนแบกหม้อน้ำ",
-              "แกะ",
-              "ปลา",
-              "แพะทะเล"
-            ],
+            question: "การผูกเงื่อนมีประโยชน์อย่างไร",
+            options: ["ใช้ในการทำอาหาร", "ใช้ในการตั้งแคมป์", "ใช้ในการช่วยเหลือผู้อื่น", "ถูกทุกข้อ"],
             correct: 3
           },
           {
-            question: "20. เดือนพฤษภาคม ได้ชื่อมาจากกลุ่มดาวราศีใด",
-            options: [
-              "คนคู่",
-              "ปู",
-              "วัวตัวผู้",
-              "สิงโต"
-            ],
+            question: "เงื่อนที่ใช้ผูกเชือกทั้งสองเส้นเข้าด้วยกัน เรียกว่าอะไร",
+            options: ["เงื่อนสแควร์", "เงื่อนชีท", "เงื่อนคู่", "เงื่อนแปด"],
+            correct: 1
+          },
+          {
+            question: "เงื่อนที่ใช้ผูกเชือกกับเสา เรียกว่าอะไร",
+            options: ["เงื่อนคู่", "เงื่อนยึด", "เงื่อนแปด", "เงื่อนชีท"],
+            correct: 1
+          },
+          {
+            question: "กิจกรรมที่ 2 ของเครื่องหมายนักบุกเบิก คืออะไร",
+            options: ["การผูกเงื่อน", "การใช้ขวาน", "การใช้เลื่อย", "การใช้มีด"],
+            correct: 1
+          },
+          {
+            question: "เมื่อใช้ขวานควรระวังอะไรเป็นพิเศษ",
+            options: ["น้ำหนักของขวาน", "ความคมของขวาน", "ความยาวของด้ามขวาน", "ทุกข้อถูก"],
+            correct: 3
+          },
+          {
+            question: "การใช้ขวานตัดไม้ ควรตัดในมุมเท่าใด",
+            options: ["30 องศา", "45 องศา", "60 องศา", "90 องศา"],
+            correct: 1
+          },
+          {
+            question: "กิจกรรมที่ 3 ของเครื่องหมายนักบุกเบิก คืออะไร",
+            options: ["การผูกเงื่อน", "การใช้ขวาน", "การใช้เลื่อย", "การใช้มีด"],
+            correct: 2
+          },
+          {
+            question: "การใช้เลื่อยควรระวังอะไรเป็นพิเศษ",
+            options: ["ความคมของฟันเลื่อย", "การเลื่อยควรเลื่อยทางเดียว", "การจับเลื่อยต้องถูกวิธี", "ทุกข้อถูก"],
+            correct: 3
+          },
+          {
+            question: "กิจกรรมที่ 4 ของเครื่องหมายนักบุกเบิก คืออะไร",
+            options: ["การผูกเงื่อน", "การใช้ขวาน", "การใช้เลื่อย", "การใช้มีด"],
+            correct: 3
+          },
+          {
+            question: "การใช้มีดควรระวังอะไรเป็นพิเศษ",
+            options: ["ความคมของมีด", "การจับมีดต้องถูกวิธี", "ต้องเก็บมีดในฝักเสมอ", "ทุกข้อถูก"],
+            correct: 3
+          },
+          {
+            question: "การส่งมีดให้คนอื่นควรส่งอย่างไร",
+            options: ["ส่งด้ามให้", "ส่งปลายมีดให้", "โยนไปให้", "วางลงบนพื้นแล้วให้เขามารับเอง"],
             correct: 0
+          },
+          {
+            question: "เครื่องมือที่ใช้ในการตั้งแคมป์ มีอะไรบ้าง",
+            options: ["ขวาน เลื่อย มีด", "ค้อน ตะปู", "เชือก เต็นท์", "ทุกข้อถูก"],
+            correct: 3
+          },
+          {
+            question: "การผูกเงื่อนสแควร์ใช้ในกรณีใด",
+            options: ["ผูกเสาทำเป็นตัว A", "ผูกเสาทำเป็นตัว H", "ผูกเสาทำเป็นตัว X", "ถูกทุกข้อ"],
+            correct: 3
+          },
+          {
+            question: "การผูกเงื่อนชีทใช้ในกรณีใด",
+            options: ["ผูกเชือกทั้งสองเส้นเข้าด้วยกัน", "ผูกเชือกกับเสา", "ผูกเชือกทำห่วง", "ผูกเชือกกับเต็นท์"],
+            correct: 0
+          },
+          {
+            question: "เมื่อใช้ขวาน เลื่อย มีดเสร็จแล้วควรทำอย่างไร",
+            options: ["ทิ้งไว้ที่เดิม", "เก็บให้เรียบร้อย", "ทำความสะอาดแล้วเก็บให้เรียบร้อย", "ล้างน้ำแล้วทิ้งไว้"],
+            correct: 2
           }
         ]
       },
       {
-        name: "นักผจญภัย",
-        icon: "🏔️",
-        sheetName: "Sheet4",
+        name: 'การสะกดรอย',
+        sheet: 'Sheet4',
         questions: [
           {
-            question: "1. ความมุ่งหมายของกิจกรรมผจญภัยคือข้อใด",
-            options: [
-              "ท้าทายให้ลูกเสือได้ใช้กำลังทั้งร่างกาย",
-              "ท้าทายให้ลูกเสือได้ใช้กำลังความคิด",
-              "ร่วมกันคิดแก้ไขปัญหาช่วยกันทำอุปกรณ์ในการแก้ไขปัญหา",
-              "ถูกทุกข้อที่กล่าวมา"
-            ],
-            correct: 3
-          },
-          {
-            question: "2. การตัดสินใจของนายหมู่ ควรมีลักษณะอย่างไรในการผจญภัย",
-            options: [
-              "จะต้องดำเนินการไปเพื่อให้สามารถนำให้หมู่ของตนผ่านพ้นเหตุการณ์ไปได้ด้วยความสำเร็จ",
-              "จะต้องดำเนินการไปเพื่อให้สามารถเอาชนะหมู่อื่นๆ ไปได้ด้วยความสำเร็จ",
-              "จะต้องดำเนินการไปเพื่อให้สามารถแข่งขันกับหมู่อื่นๆ ไปได้ด้วยความสำเร็จ",
-              "ไม่มีข้อใดกล่าวถูกต้อง"
-            ],
-            correct: 0
-          },
-          {
-            question: "3. กิจกรรมในการผจญภัยมีกี่ประเภท",
-            options: [
-              "1",
-              "2",
-              "3",
-              "4"
-            ],
+            question: "เครื่องหมายนักสะกดรอยมีรูปร่างเป็นอย่างไร",
+            options: ["รูปวงกลม", "รูปสี่เหลี่ยมจัตุรัส", "รูปสามเหลี่ยมหน้าจั่ว", "รูปดาว"],
             correct: 2
           },
           {
-            question: "4. ข้อใดไม่ใช่การผจญภัยในกิจกรรมทางน้ำ",
-            options: [
-              "โปโลน้ำ",
-              "พายเรือ",
-              "โหนเชือก",
-              "ว่ายน้ำ"
-            ],
-            correct: 2
-          },
-          {
-            question: "5. กิจกรรมที่จัดบนพื้นดินเช่นสะพานข้ามเชือก ไต่เขา ปื้นกำแพง เป็นการผจญภัยประเภทใด",
-            options: [
-              "กิจกรรมทางเชือก",
-              "กิจกรรมทางน้ำ",
-              "กิจกรรมทางบก",
-              "กิจกรรมทางอากาศ"
-            ],
-            correct: 2
-          },
-          {
-            question: "6. ความปลอดภัยในการจัดกิจกรรมผจญภัย มีความหมายตรงกับข้อใด",
-            options: [
-              "ความสามารถในการควบคุมการปฏิบัติต่างๆ เพื่อให้พ้นจากอันตราย",
-              "ความสามารถในการควบคุมการปฏิบัติต่างๆ ให้ถูกต้อง เหมาะสม",
-              "ความสามารถในการควบคุมการปฏิบัติต่างๆ ของลูกเสือตามคำสั่ง",
-              "ความสามารถในการควบคุมการปฏิบัติต่างๆ ของผู้กำกับลูกเสือ"
-            ],
-            correct: 0
-          },
-          {
-            question: "7. การไต่เชือก ควรคำนึงถึงข้อใดมากที่สุด",
-            options: [
-              "ความชำนาญ",
-              "ความปลอดภัย",
-              "ความอดทน",
-              "ความกล้าหาญ"
-            ],
+            question: "เครื่องหมายนักสะกดรอยมีสีอะไร",
+            options: ["แดง", "เขียว", "น้ำเงิน", "เหลือง"],
             correct: 1
           },
           {
-            question: "8. ปั้นจั่นบนต้นไม้ สร้างขึ้นบริเวณลำธารที่มีลักษณะอย่างไร",
-            options: [
-              "ลำธารที่มีตลิ่งสูงชัน",
-              "ลำธารแคบๆ",
-              "ลำธารที่มีน้ำตื้นๆ",
-              "ลำธารที่มีน้ำลึก"
-            ],
+            question: "เครื่องหมายนักสะกดรอยให้ติดที่ใด",
+            options: ["แขนเสื้อซ้าย", "แขนเสื้อขวา", "อกซ้าย", "อกขวา"],
             correct: 1
           },
           {
-            question: "9. การหาทิศในข้อใด อาจคลาดเคลื่อนได้มาก",
-            options: [
-              "ดูเข็มทิศ",
-              "ดูดวงอาทิตย์",
-              "ดูพระในอุโบสถ์",
-              "จับต้นไม้"
-            ],
-            correct: 3
+            question: "เครื่องหมายนักสะกดรอยมีกี่กิจกรรม",
+            options: ["3 กิจกรรม", "4 กิจกรรม", "5 กิจกรรม", "6 กิจกรรม"],
+            correct: 1
           },
           {
-            question: "10. ข้อใด เป็นสาเหตุของการเกิดอุบัติเหตุ",
-            options: [
-              "ความชำนาญ",
-              "ความว่องไว",
-              "ความเคยชิน",
-              "ความประมาท"
-            ],
-            correct: 3
-          },
-          {
-            question: "11. ลูกเสือสามารถจำแนกเสียงสัตว์ได้ เป็นการใช้ประสามสัมผัสด้านใด",
-            options: [
-              "จมูก",
-              "ตา",
-              "ลิ้น",
-              "หู"
-            ],
-            correct: 3
-          },
-          {
-            question: "12. การเดินทางไปไหนในเวลากลางคืน ควรเลือกสวมเสื้อผ้าสีอะไร",
-            options: [
-              "สีน้ำตาล",
-              "สีเทา",
-              "สีเหลือง",
-              "สีน้ำเงิน"
-            ],
-            correct: 2
-          },
-          {
-            question: "13. การใช้เข็มทิศหาทิศ จะทราบทิศใดก่อน",
-            options: [
-              "ทิศใต้",
-              "ทิศตะวันออก",
-              "ทิศเหนือ",
-              "ทิศตะวันตก"
-            ],
-            correct: 2
-          },
-          {
-            question: "14. การขอความช่วยเหลือเมื่อเกิดอุบัติเหตุ ข้อใดสำคัญที่สุด",
-            options: [
-              "ความทันสมัยของเครื่องมือสื่อสาร",
-              "ลักษณะการเกิดอุบัติเหตุ",
-              "การพูดสรุปเหตุการณ์",
-              "รายละเอียดของผู้บาดเจ็บ"
-            ],
+            question: "กิจกรรมที่ 1 ของเครื่องหมายนักสะกดรอย คืออะไร",
+            options: ["การสังเกตรอย", "การใช้เข็มทิศ", "การอ่านแผนที่", "การประมาณระยะทาง"],
             correct: 0
           },
           {
-            question: "15. วิธีง่ายๆ ที่จะทำให้ผู้สอบถามเส้นทางไปได้ถูกต้องโดยไม่หลงทาง คือข้อใด",
-            options: [
-              "ให้อ่านแบบรายงานการสำรวจ",
-              "มอบภาพถ่ายสถานที่ที่จะไปให้",
-              "อธิบายพร้อมทั้งเขียนแผนที่ประกอบ",
-              "พาไปส่งสถานีจอดรถประจำทาง"
-            ],
-            correct: 2
-          },
-          {
-            question: "16. ข้อใดไม่ใช่การเตรียมความพร้อมทางร่างกาย และจิตใจ",
-            options: [
-              "ออกกำลังกายให้สม่ำเสมอ",
-              "หาเวลาพักผ่อนให้เพียงพอ",
-              "ต้องทำให้จิตใจมั่นคง กล้าหาญ",
-              "ต้องทำจิตใจให้สนุกสนาน"
-            ],
+            question: "การสังเกตรอยมีประโยชน์อย่างไร",
+            options: ["ช่วยในการติดตาม", "ช่วยในการหาทาง", "ช่วยในการค้นหา", "ถูกทุกข้อ"],
             correct: 3
           },
           {
-            question: "17. ลูกเสือต้องขวนขวายหาความรู้ด้วยตนเองหรือสอบถามจากลูกเสือรุ่นพี่ จากข้อความเป็นการเตรียมความพร้อมของลูกเสือในด้านใด",
-            options: [
-              "การเตรียมพร้อมทางร่างกาย",
-              "การเตรียมพร้อมทางจิตใจ",
-              "การเตรียมพร้อมทางความรู้",
-              "การเตรียมพร้อมด้านอุปกรณ์ออกค่าย"
-            ],
+            question: "รอยเท้าคนเดินมีลักษณะอย่างไร",
+            options: ["รอยลึกที่ส้นเท้า", "รอยตื้นที่ส้นเท้า", "รอยลึกที่ปลายเท้า", "ไม่มีรอยชัดเจน"],
+            correct: 0
+          },
+          {
+            question: "กิจกรรมที่ 2 ของเครื่องหมายนักสะกดรอย คืออะไร",
+            options: ["การสังเกตรอย", "การใช้เข็มทิศ", "การอ่านแผนที่", "การประมาณระยะทาง"],
+            correct: 1
+          },
+          {
+            question: "เข็มทิศมีประโยชน์อย่างไร",
+            options: ["ช่วยบอกทิศทาง", "ช่วยบอกเวลา", "ช่วยบอกระยะทาง", "ช่วยบอกความสูง"],
+            correct: 0
+          },
+          {
+            question: "เข็มทิศชี้ไปทางใด",
+            options: ["ทิศเหนือ", "ทิศใต้", "ทิศตะวันออก", "ทิศตะวันตก"],
+            correct: 0
+          },
+          {
+            question: "การอ่านเข็มทิศควรระวังอะไร",
+            options: ["อย่าให้เข็มทิศอยู่ใกล้โลหะ", "อย่าให้เข็มทิศอยู่ใกล้แม่เหล็ก", "อย่าให้เข็มทิศอยู่ใกล้เครื่องใช้ไฟฟ้า", "ถูกทุกข้อ"],
+            correct: 3
+          },
+          {
+            question: "กิจกรรมที่ 3 ของเครื่องหมายนักสะกดรอย คืออะไร",
+            options: ["การสังเกตรอย", "การใช้เข็มทิศ", "การอ่านแผนที่", "การประมาณระยะทาง"],
             correct: 2
           },
           {
-            question: "18. ข้อใดไม่ใช่ทักษะในการผจญภัยของลูกเสือ",
-            options: [
-              "ทักษะการเป็นผู้นำ",
-              "ทักษะทางเทคนิค",
-              "ทักษะทางภาษา",
-              "ทักษะการจัดค่ายพักแรม"
-            ],
-            correct: 2
+            question: "แผนที่มีประโยชน์อย่างไร",
+            options: ["ช่วยบอกตำแหน่ง", "ช่วยหาทาง", "ช่วยวางแผนการเดินทาง", "ถูกทุกข้อ"],
+            correct: 3
           },
           {
-            question: "19. ลูกเสือนายใดใช้ทักษะทางเทคนิคได้ถูกต้องเหมาะสมที่สุด",
-            options: [
-              "ลูกเสือวิชิตดูแผนที่และใช้เข็มทิศกลับด้าน",
-              "ลูกเสือวิวัฒน์สวมเสื้อกันหนาวสีดำขณะผจญภัยกลางคืน",
-              "ลูกเสือวิเชียรประเมินสภาพดินฟ้าอากาศก่อนออกเดินทางไกล",
-              "ลูกเสือวินัยออกเดินทางไกลสายเกินเวลาที่กำหนด"
-            ],
-            correct: 2
+            question: "สัญลักษณ์บนแผนที่สีน้ำเงิน หมายถึงอะไร",
+            options: ["ถนน", "แม่น้ำ", "ภูเขา", "ป่าไม้"],
+            correct: 1
           },
           {
-            question: "20. ข้อใดไม่ใช่ความรับผิดชอบต่อหมู่ลูกเสือของตนในการเดินทางไกลออกค่ายพักแรม",
-            options: [
-              "ประมาณความยากลำบากของเส้นทาง",
-              "มีเวลากลางวันเพียงพอสำหรับการเดินทาง",
-              "เดินไปเป็นกลุ่มเดียวกัน ไม่ช้าไม่เร็วเกินไป",
-              "จำนวนสมาชิกในการเดินทางควรมีจำนวนมากๆ"
-            ],
+            question: "สัญลักษณ์บนแผนที่สีแดง หมายถึงอะไร",
+            options: ["ถนน", "แม่น้ำ", "ภูเขา", "ป่าไม้"],
+            correct: 0
+          },
+          {
+            question: "กิจกรรมที่ 4 ของเครื่องหมายนักสะกดรอย คืออะไร",
+            options: ["การสังเกตรอย", "การใช้เข็มทิศ", "การอ่านแผนที่", "การประมาณระยะทาง"],
+            correct: 3
+          },
+          {
+            question: "การประมาณระยะทางสามารถทำได้โดยวิธีใด",
+            options: ["นับก้าว", "ใช้เวลาในการเดิน", "ใช้สายตา", "ถูกทุกข้อ"],
+            correct: 3
+          },
+          {
+            question: "การสะกดรอยในป่าควรระวังอะไร",
+            options: ["สัตว์อันตราย", "พืชมีพิษ", "หลงทาง", "ถูกทุกข้อ"],
+            correct: 3
+          },
+          {
+            question: "เครื่องมือที่ใช้ในการสะกดรอย มีอะไรบ้าง",
+            options: ["เข็มทิศ แผนที่", "เชือก ไฟฉาย", "นกหวีด น้ำ", "ถูกทุกข้อ"],
+            correct: 3
+          },
+          {
+            question: "ก่อนออกสะกดรอยควรทำอย่างไร",
+            options: ["วางแผนเส้นทาง", "เตรียมอุปกรณ์", "บอกผู้ปกครอง", "ถูกทุกข้อ"],
             correct: 3
           }
         ]
       },
       {
-        name: "หัวหน้าคนครัว",
-        icon: "👨‍🍳",
-        sheetName: "Sheet5",
+        name: 'ผู้พิทักษ์ป่า',
+        sheet: 'Sheet5',
         questions: [
           {
-            question: "1. อาหารลักษณะใดที่ควรจะนำมาปรุงรับประทานในการอยู่ค่าย",
-            options: [
-              "ใช้อุปกรณ์หลายอย่าง",
-              "ใช้ของสดปรุงเท่านั้น",
-              "มีขั้นตอนในการปรุงอาหารยาก",
-              "อาหารที่มีวิธีการปรุงง่ายๆ"
-            ],
-            correct: 3
+            question: "เครื่องหมายผู้พิทักษ์ป่ามีรูปร่างเป็นอย่างไร",
+            options: ["รูปวงกลม", "รูปสี่เหลี่ยมจัตุรัส", "รูปสามเหลี่ยมหน้าจั่ว", "รูปดาว"],
+            correct: 2
           },
           {
-            question: "2. การทำอาหารในค่ายยึดหลัก",
-            options: [
-              "ง่าย รวดเร็ว ถูกหลักอนามัย",
-              "ง่าย สะดวก สมบูรณ์พร้อม",
-              "ประหยัด อร่อย สวยงาม",
-              "อร่อย เลิศหรู สวยงาม"
-            ],
-            correct: 0
-          },
-          {
-            question: "3. การระวังรักษาอาหารมีวิธีปฏิบัติดังนี้",
-            options: [
-              "เก็บเข้าตู้เย็น",
-              "ป้องกันมิให้สัตว์มากิน",
-              "ปิดให้มิดชิด",
-              "แขวนไว้ในที่สูง"
-            ],
-            correct: 3
-          },
-          {
-            question: "4. ข้อควรคำนึงในการประกอบอาหารคือ",
-            options: [
-              "ถูกหลักอนามัย",
-              "อาหารสุก ไร้สารพิษ",
-              "สะอาด เก็บกวาดเรียบร้อย",
-              "ถูกทุกข้อ"
-            ],
-            correct: 3
-          },
-          {
-            question: "5. สถานที่กำจัดขยะควรปฏิบัติอย่างไร",
-            options: [
-              "ทำรั้วป้องกันสัตว์",
-              "หลุมขยะควรให้ลึกพอสมควร",
-              "ทำฝาปิดหลุมขยะ",
-              "ถูกทุกข้อ"
-            ],
-            correct: 3
-          },
-          {
-            question: "6. การปฏิบัติกิจกรรมขณะอยู่ค่ายพักแรม เป็นการทำให้ลูกเสือมีลักษณะอย่างไร",
-            options: [
-              "เพลิดเพลิน",
-              "การนำไปใช้ให้เกิดประโยชน์",
-              "รู้จักธรรมชาติมากขึ้น",
-              "พิสูจน์ความสามารถของตนเอง"
-            ],
-            correct: 3
-          },
-          {
-            question: "7. การหุงข้าวหากไม่มีภาชนะหุงควรใช้อะไร",
-            options: [
-              "กระบอกไม้ไผ่",
-              "ใบกล้วย",
-              "ขวดพลาสติก",
-              "กระติกน้ำ"
-            ],
-            correct: 0
-          },
-          {
-            question: "8. การทำให้อาหารสุกแบบใดรวดเร็วที่สุด",
-            options: [
-              "การนึ่ง",
-              "การต้ม",
-              "การเผา",
-              "การอบ"
-            ],
+            question: "เครื่องหมายผู้พิทักษ์ป่ามีสีอะไร",
+            options: ["แดง", "เขียว", "น้ำเงิน", "เหลือง"],
             correct: 1
           },
           {
-            question: "9. อาหารชนิดใดไม่จำเป็นต้องใช้ความร้อน",
-            options: [
-              "น้ำพริกโจร",
-              "ปลาทอด",
-              "ไข่ปิ้ง",
-              "ข้าวหลาม"
-            ],
+            question: "เครื่องหมายผู้พิทักษ์ป่าให้ติดที่ใด",
+            options: ["แขนเสื้อซ้าย", "แขนเสื้อขวา", "อกซ้าย", "อกขวา"],
+            correct: 2
+          },
+          {
+            question: "เครื่องหมายผู้พิทักษ์ป่ามีกี่กิจกรรม",
+            options: ["3 กิจกรรม", "4 กิจกรรม", "5 กิจกรรม", "6 กิจกรรม"],
+            correct: 3
+          },
+          {
+            question: "กิจกรรมที่ 1 ของเครื่องหมายผู้พิทักษ์ป่า คืออะไร",
+            options: ["การปลูกต้นไม้", "การดูแลต้นไม้", "การรักษาป่า", "การศึกษาธรรมชาติ"],
             correct: 0
           },
           {
-            question: "10. หากไม่มีภาชนะต้มไข่ควรใช้สิ่งใดแทน",
-            options: [
-              "กะลามะพร้าว",
-              "ถุงพลาสติก",
-              "ใบบอน",
-              "ใบกล้วย"
-            ],
-            correct: 2
-          },
-          {
-            question: "11. อาหารสดหมายถึงข้อใด",
-            options: [
-              "ไข่เค็ม",
-              "ยำปลากระป๋อง",
-              "ม่าม่า",
-              "ผัดผักรวม"
-            ],
+            question: "การปลูกต้นไม้มีประโยชน์อย่างไร",
+            options: ["ช่วยเพิ่มออกซิเจน", "ช่วยลดมลพิษ", "ช่วยรักษาสมดุลธรรมชาติ", "ถูกทุกข้อ"],
             correct: 3
           },
           {
-            question: "12. เมื่อหุงข้าวไม่สุกควรแก้ปัญหาอย่างไร",
-            options: [
-              "เททิ้งแล้วหุงใหม่",
-              "ใส่น้ำตั้งไฟให้แรง คนให้ทั่ว",
-              "พรมน้ำเรื่อยๆ ตั้งไฟอ่อน คนให้ทั่ว",
-              "เพิ่มน้ำอีกเท่าตัว ตั้งไปอ่อนๆ"
-            ],
-            correct: 2
+            question: "การปลูกต้นไม้ควรปลูกในช่วงเวลาใด",
+            options: ["ช่วงฤดูร้อน", "ช่วงฤดูฝน", "ช่วงฤดูหนาว", "ทุกฤดูกาล"],
+            correct: 1
           },
           {
-            question: "13. เผาปลาไม่ให้ไหม้ควรทาอย่างไร",
-            options: [
-              "ชุบน้ำมันที่ผิวปลาแล้วเผา",
-              "ชุบน้ำที่ผิวปลาอยู่เรื่อยๆ ขณะเผา",
-              "ขณะเผา ไม่ให้ไฟแรงจนเกินไป",
-              "นำใบกล้วยมาห่อทั้งตัวปลาแล้วเผา"
-            ],
+            question: "กิจกรรมที่ 2 ของเครื่องหมายผู้พิทักษ์ป่า คืออะไร",
+            options: ["การปลูกต้นไม้", "การดูแลต้นไม้", "การรักษาป่า", "การศึกษาธรรมชาติ"],
+            correct: 1
+          },
+          {
+            question: "การดูแลต้นไม้ควรทำอย่างไร",
+            options: ["รดน้ำสม่ำเสมอ", "ใส่ปุ๋ย", "กำจัดวัชพืช", "ถูกทุกข้อ"],
             correct: 3
           },
           {
-            question: "14. เหตุใดการย่างต้องใช้ไฟอ่อนๆ",
-            options: [
-              "เพื่อให้อาหารสุกทั้งนอกใน",
-              "เพื่อป้องกันการไหม้",
-              "เพื่อให้ได้รสชาติอาหารที่ต้องการ",
-              "ถูกทุกข้อ"
-            ],
-            correct: 3
-          },
-          {
-            question: "15. พืชใต้ดินชนิดใด ไม่สามารถนามาทำขนมได้",
-            options: [
-              "บุก",
-              "บอน",
-              "เผือก",
-              "มัน"
-            ],
+            question: "ต้นไม้ต้องการอะไรในการเจริญเติบโต",
+            options: ["แสงแดด น้ำ ธาตุอาหาร", "เฉพาะน้ำ", "เฉพาะแสงแดด", "เฉพาะธาตุอาหาร"],
             correct: 0
           },
           {
-            question: "16. การทำเหนียวหลามมีส่วนผสมใดบ้าง",
-            options: [
-              "น้ำ-ข้าวเหนียว",
-              "กะทิ-ข้าวเหนียว",
-              "น้ำตาล-ข้าวเหนียว",
-              "น้ำเชื่อม-ข้าวเหนียว"
-            ],
-            correct: 1
+            question: "กิจกรรมที่ 3 ของเครื่องหมายผู้พิทักษ์ป่า คืออะไร",
+            options: ["การปลูกต้นไม้", "การดูแลต้นไม้", "การรักษาป่า", "การศึกษาธรรมชาติ"],
+            correct: 2
           },
           {
-            question: "17. หากไม่มีภาชนะขัดถูควรใช้สิ่งใดแทน",
-            options: [
-              "ใบกล้วยแห้ง",
-              "ใบข่อย",
-              "ใยมะพร้าว",
-              "ถูกทุกข้อ"
-            ],
+            question: "การรักษาป่าทำได้อย่างไร",
+            options: ["ไม่ทำลายต้นไม้", "ไม่ทิ้งขยะ", "ไม่จุดไฟ", "ถูกทุกข้อ"],
             correct: 3
           },
           {
-            question: "18. การปรุงอาหารสดคาว ควรใช้สิ่งใดดับคาว",
-            options: [
-              "กระเทียม",
-              "น้ำ",
-              "ตะไคร้",
-              "ขมิ้น"
-            ],
+            question: "ป่าไม้มีประโยชน์อย่างไร",
+            options: ["เป็นแหล่งน้ำ", "เป็นที่อยู่ของสัตว์", "ช่วยกรองอากาศ", "ถูกทุกข้อ"],
             correct: 3
           },
           {
-            question: "19. ขั้นตอนการต้มถั่วเขียวข้อใดถูกต้อง",
-            options: [
-              "แช่-ใส่น้ำต้ม-ใส่ถั่วเขียว-ใส่น้ำตาล",
-              "แช่-ใส่น้ำต้ม-ใส่น้ำตาล-ใส่ถั่วเขียว",
-              "แช่-ใส่น้ำต้ม-ใส่ถั่วเขียวและน้ำตาล",
-              "ข้อ ก และ ข ถูก"
-            ],
+            question: "กิจกรรมที่ 4 ของเครื่องหมายผู้พิทักษ์ป่า คืออะไร",
+            options: ["การปลูกต้นไม้", "การดูแลต้นไม้", "การรักษาป่า", "การศึกษาธรรมชาติ"],
+            correct: 3
+          },
+          {
+            question: "การศึกษาธรรมชาติทำได้อย่างไร",
+            options: ["สังเกตพืช", "สังเกตสัตว์", "เรียนรู้ระบบนิเวศ", "ถูกทุกข้อ"],
+            correct: 3
+          },
+          {
+            question: "ระบบนิเวศคืออะไร",
+            options: ["ความสัมพันธ์ระหว่างสิ่งมีชีวิตกับสิ่งแวดล้อม", "เฉพาะพืช", "เฉพาะสัตว์", "เฉพาะน้ำและดิน"],
             correct: 0
           },
           {
-            question: "20. ควรเก็บรักษาอาหารให้พ้นจากมดแมลงและสัตว์ได้อย่างไร",
-            options: [
-              "สร้างครัวลอยฟ้า",
-              "สร้างครัวบนดินแต่ปิดด้วยใบไม้",
-              "สร้างกระโจมกั้นแล้วปิดด้วยใบไม้",
-              "สร้างกำแพงรั้วให้รัดกุม"
-            ],
+            question: "การอนุรักษ์ธรรมชาติมีความสำคัญอย่างไร",
+            options: ["รักษาสมดุลธรรมชาติ", "ป้องกันภัยพิบัติ", "สืบทอดให้คนรุ่นหลัง", "ถูกทุกข้อ"],
+            correct: 3
+          },
+          {
+            question: "สิ่งที่ไม่ควรทำในป่า คืออะไร",
+            options: ["ตัดต้นไม้", "ทิ้งขยะ", "จุดไฟ", "ถูกทุกข้อ"],
+            correct: 3
+          },
+          {
+            question: "การเป็นผู้พิทักษ์ป่าที่ดี ควรทำอย่างไร",
+            options: ["รักษาป่า", "ปลูกป่า", "รณรงค์อนุรักษ์", "ถูกทุกข้อ"],
+            correct: 3
+          },
+          {
+            question: "วันสิ่งแวดล้อมโลกตรงกับวันที่เท่าใด",
+            options: ["5 มิถุนายน", "5 ธันวาคม", "1 มกราคม", "1 กรกฎาคม"],
             correct: 0
-          }
-        ]
-      },
-      {
-        name: "การอนุรักษ์ธรรมชาติ",
-        icon: "🌿",
-        sheetName: "Sheet6",
-        questions: [
-          {
-            question: "1. สิ่งใดที่ไม่จัดว่าเป็นธรรมชาติ",
-            options: [
-              "ถ้ำ",
-              "ต้นไม้",
-              "บ้านเรือน",
-              "ภูเขา"
-            ],
-            correct: 2
-          },
-          {
-            question: "2. พื้นที่ส่วนใดของบริเวณบ้านที่เหมาะในการจัดสวนสำหรับคนตาบอด",
-            options: [
-              "หน้าบ้าน",
-              "หลังบ้าน",
-              "ข้างบ้าน",
-              "นอกบริเวณบ้าน"
-            ],
-            correct: 1
-          },
-          {
-            question: "3. มลภาวะในอากาศเกิดจากยวดยานชนิดใด",
-            options: [
-              "รถไฟฟ้า",
-              "เรือพาย",
-              "เครื่องร่อน",
-              "รถยนต์"
-            ],
-            correct: 3
-          },
-          {
-            question: "4. ขบวนการที่ทำให้น้ำเสียมากที่สุดได้แก่ข้อใด",
-            options: [
-              "การทิ้งขยะลงในน้ำ",
-              "การทำเหมืองแร่",
-              "น้ำเสียที่ปล่อยจากโรงงานอุตสาหกรรม",
-              "น้ำทิ้งจากบ้านเรือน"
-            ],
-            correct: 2
-          },
-          {
-            question: "5. ในขณะที่เฝ้าสังเกตดูสัตว์ควรปฏิบัติตนอย่างไร",
-            options: [
-              "เปิดวิทยุฟัง",
-              "เคลื่อนไหวอย่างรวดเร็ว",
-              "นั่งนิ่งไม่พูดคุย",
-              "ร้องเพลงเล่นดนตรี"
-            ],
-            correct: 2
-          },
-          {
-            question: "6. กรมใดที่ทำหน้าที่อนุรักษ์สัตว์น้ำ",
-            options: [
-              "กรมชลประทาน",
-              "กรมประมง",
-              "กรมการปกครอง",
-              "กรมอุตุนิยมวิทยา"
-            ],
-            correct: 1
-          },
-          {
-            question: "7. อะไรเป็นสาเหตุที่ทำให้หน้าดินแห้งทลาย",
-            options: [
-              "ดินมีความชื้นสูง",
-              "การตัดไม้ทำลายป่า",
-              "ดินขาดแร่ธาตุ",
-              "การปลูกพืชหมุนเวียน"
-            ],
-            correct: 1
-          },
-          {
-            question: "8. ข้อใดที่ไม่ใช่การอนุรักษ์น้ำ",
-            options: [
-              "ไม่ลงเล่นน้ำในสระ",
-              "ใช้น้ำแบบประหยัดและเกิดประโยชน์",
-              "ปลูกดอกบัวในสระ",
-              "ทำส้วมไว้ข้างสระ"
-            ],
-            correct: 3
-          },
-          {
-            question: "9. ควรใช้ไม้ประเภทใดสำหรับจัดสวนให้คนตาบอด",
-            options: [
-              "มีความงามที่ลำต้น",
-              "มีความงามที่ใบ",
-              "ดอกมีสีสวย",
-              "ดอกมีกลิ่นหอม"
-            ],
-            correct: 3
-          },
-          {
-            question: "10. หลุมที่ใช้ก่อกองไฟสำหรับชุมนุมรอบกองไฟควรมีความลึกเท่าใด",
-            options: [
-              "1 คืบ",
-              "1 ฟุต",
-              "1 ฝ่ามือ",
-              "1 ศอก"
-            ],
-            correct: 2
-          },
-          {
-            question: "11. สารเสพติดในข้อใดมีสรรพคุณทางการแพทย์ สามารถรักษาโรคได้",
-            options: [
-              "ยาบ้า",
-              "ฝิ่น",
-              "โคเคน",
-              "มอร์ฟีน"
-            ],
-            correct: 3
-          },
-          {
-            question: "12. ข้อใดที่จัดเป็นไม้ชนิดยืนต้น",
-            options: [
-              "พิกุล",
-              "กุหลาบ",
-              "ราตรี",
-              "นมแมว"
-            ],
-            correct: 0
-          },
-          {
-            question: "13. วิธีใดที่จัดว่าเป็นการอนุรักษ์สระน้ำ",
-            options: [
-              "ปลูกต้นไม้รอบขอบสระ",
-              "ปลูกหญ้าตามบริเวณคันดินรอบสระ",
-              "ทำรั้วเตี้ยๆ รอบขอบสระ",
-              "ปลูกไม้น้ำในสระ"
-            ],
-            correct: 0
-          },
-          {
-            question: "14. ตัวการที่สำคัญที่ทำให้น้ำเกิดมลภาวะได้แก่อะไร",
-            options: [
-              "ธรรมชาติ",
-              "มนุษย์",
-              "สัตว์",
-              "สิ่งแวดล้อม"
-            ],
-            correct: 1
-          },
-          {
-            question: "15. การขุดสระที่มีรูปแบบที่ถูกต้องมีผลดีทางด้านใด",
-            options: [
-              "เกิดความสวยงาม",
-              "มีอายุการใช้ยาวนาน",
-              "น้ำไม่ซึมหายไปในดิน",
-              "ดูแลรักษาง่าย"
-            ],
-            correct: 1
-          },
-          {
-            question: "16. สัตว์ที่ชอบกินดินโป่งได้แก่สัตว์อะไร",
-            options: [
-              "แมวป่า",
-              "เก้ง",
-              "เลียงผา",
-              "กระต่าย"
-            ],
-            correct: 2
-          },
-          {
-            question: "17. วันที่เหมาะสมในการที่ลูกเสือจะออกไปบริการแก่สังคมคือวันใด",
-            options: [
-              "วันแรงงาน",
-              "วันวาเลนไทม์",
-              "วันคริสต์มาส",
-              "วันวชิราวุธ"
-            ],
-            correct: 3
-          },
-          {
-            question: "18. ไม้ชนิดใดที่จัดว่าเป็นไม้หวงห้าม",
-            options: [
-              "ไม้ไผ่",
-              "ไม้สัก",
-              "ไม้รวก",
-              "ไม้ฉำฉา"
-            ],
-            correct: 1
-          },
-          {
-            question: "19. หน่วยงานใดที่เกี่ยวข้องกับการอนุรักษ์สัตว์ป่า",
-            options: [
-              "กรมที่ดิน",
-              "กรมประมง",
-              "กรมชลประทาน",
-              "กรมอุทยานแห่งชาติ"
-            ],
-            correct: 3
-          },
-          {
-            question: "20. บริเวณที่ดินที่ถูกทอดทิ้งมีลักษณะอย่างไร",
-            options: [
-              "ดินที่มีแร่ธาตุที่พืชต้องการ",
-              "ดินที่มีความชุ่มชื่น",
-              "ดินที่แห้งแล้งตลอดปี",
-              "ดินที่มีหญ้าปกคลุม"
-            ],
-            correct: 2
-          },
-          {
-            question: "21. ผู้เสพติดบุหรี่ใหม่ๆ จะมีอาการอย่างไร",
-            options: [
-              "ปากเขียว",
-              "กระหายน้ำ",
-              "มือสั่น ความจำเสื่อม",
-              "กล้ามเนื้อเป็นอัมพาต"
-            ],
-            correct: 2
-          },
-          {
-            question: "22. การก่อกองไฟชิดโคนต้นไม้มีผลกระทบต่ออะไร",
-            options: [
-              "ลำต้น",
-              "ใบ",
-              "ราก",
-              "กิ่งก้าน"
-            ],
-            correct: 2
-          },
-          {
-            question: "23. การบริการของลูกเสือตรงกับกฎข้อใดมากที่สุด",
-            options: [
-              "ข้อที่ 1",
-              "ข้อที่ 2",
-              "ข้อที่ 3",
-              "ข้อที่ 4"
-            ],
-            correct: 2
-          },
-          {
-            question: "24. ควรสร้างที่กำบังตนเองเพื่อสังเกตชีวิตสัตว์ที่ตำแหน่งใด",
-            options: [
-              "ใต้ต้นไม้ที่มีร่มเงา",
-              "บนลานดินโล่งแจ้ง",
-              "ใกล้แหล่งน้ำที่มีร่องรอยของสัตว์ลงกิน",
-              "บนพื้นที่สูง"
-            ],
-            correct: 2
-          },
-          {
-            question: "25. ดินเสียมีลักษณะอย่างไร",
-            options: [
-              "มีความชุ่มชื้น",
-              "มีแร่ธาตุที่พืชต้องการมาก",
-              "ไม่เป็นกรดและด่าง",
-              "มีกลิ่นเหม็น"
-            ],
-            correct: 3
-          },
-          {
-            question: "26. สาเหตุที่ทำให้โครงสร้างของดินเสีย",
-            options: [
-              "การใช้ปุ๋ยเคมี",
-              "การตัดไม้ทำลายป่า",
-              "การทำเหมืองแร่",
-              "การสึกกร่อนของดิน"
-            ],
-            correct: 3
-          },
-          {
-            question: "27. บุหรี่มีสารชนิดใดผสมอยู่มาก",
-            options: [
-              "นิโคติน",
-              "กาเฟอีน",
-              "แอลกอฮอล์",
-              "สารระเหย"
-            ],
-            correct: 0
-          },
-          {
-            question: "28. ดินที่มีน้ำขังตลอดปีควรปรับปรุงอย่างไร",
-            options: [
-              "ใช้เป็นที่เลี้ยงปลา",
-              "เป็นแหล่งท่องเที่ยว",
-              "เป็นที่ปลูกพืชที่ชอบน้ำ เช่น ปอ",
-              "เป็นอ่างเก็บน้ำ"
-            ],
-            correct: 2
-          },
-          {
-            question: "29. กิจกรรมข้อใดที่เกี่ยวข้องกับการบริการของลูกเสือ",
-            options: [
-              "การเดินทางไกล",
-              "การอยู่ค่ายพักแรม",
-              "การสำรวจ",
-              "การช่วยเหลือในการอนุรักษ์แหล่งน้ำ"
-            ],
-            correct: 3
-          },
-          {
-            question: "30. ควรปรับปรุงบริเวณที่มีหิน กรวด ทราย ให้เกิดประโยชน์ได้อย่างไร",
-            options: [
-              "เป็นที่ปลูกบ้าน",
-              "เป็นแหล่งท่องเที่ยว",
-              "เป็นที่เลี้ยงสัตว์",
-              "เป็นที่เพาะปลูก"
-            ],
-            correct: 1
           }
         ]
       }
     ];
 
-    let currentSubject = null;
-    let currentAnswers = [];
-    let studentData = {};
-    let allStudentsData = [];
+    let currentSubjectIndex = 0;
+    let currentQuestionIndex = 0;
+    let userAnswers = [];
+    let studentInfo = {};
 
-    function selectSubject(index) {
-      currentSubject = index;
-      const totalQuestions = allSubjects[index].questions.length;
-      currentAnswers = new Array(totalQuestions).fill(null);
-      document.getElementById('total-questions').textContent = totalQuestions;
-      document.getElementById('subject-selection').style.display = 'none';
-      document.getElementById('student-info-section').style.display = 'block';
+    // ========================================
+    // ⚡ ฟังก์ชันใหม่: ดึงข้อมูลจาก Google Sheet
+    // ========================================
+
+    // 🔄 โหลดข้อมูลจาก Google Sheets แทน localStorage
+    async function loadDataFromGoogleSheets() {
+      try {
+        console.log('🔄 กำลังดึงข้อมูลจาก Google Sheets...');
+        
+        const response = await fetch(`${WEB_APP_URL}?action=getAllScores`);
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+          console.log('✅ ดึงข้อมูลสำเร็จ:', result.data.length, 'รายการ');
+          
+          // แปลงข้อมูลให้ตรงกับรูปแบบที่ใช้ใน localStorage
+          const formattedData = result.data.map(item => ({
+            date: item.date,
+            name: item.name,
+            classroom: item.classroom,
+            number: item.number.toString(),
+            subject: item.subject,
+            percentage: parseFloat(item.percentage),
+            correct: parseInt(item.correct),
+            wrong: parseInt(item.wrong)
+          }));
+          
+          // อัปเดต localStorage ด้วยข้อมูลจาก Google Sheets
+          localStorage.setItem('examResults', JSON.stringify(formattedData));
+          
+          // อัปเดต UI indicator
+          updateSyncStatus('✅ ซิงค์แล้ว');
+          
+          return formattedData;
+        } else {
+          console.error('❌ เกิดข้อผิดพลาด:', result.message);
+          updateSyncStatus('⚠️ ข้อผิดพลาด');
+          // ถ้าดึงไม่ได้ ให้ใช้ข้อมูลจาก localStorage
+          return JSON.parse(localStorage.getItem('examResults') || '[]');
+        }
+      } catch (error) {
+        console.error('❌ ไม่สามารถดึงข้อมูลจาก Google Sheets:', error);
+        updateSyncStatus('⚠️ ออฟไลน์');
+        // ถ้าดึงไม่ได้ ให้ใช้ข้อมูลจาก localStorage
+        return JSON.parse(localStorage.getItem('examResults') || '[]');
+      }
     }
 
-    function backToSubjectSelection() {
-      document.getElementById('subject-selection').style.display = 'block';
-      document.getElementById('student-info-section').style.display = 'none';
-      document.getElementById('quiz-section').style.display = 'none';
-      document.getElementById('results-section').style.display = 'none';
-      document.getElementById('summary-section').style.display = 'none';
-      document.getElementById('student-dashboard-section').style.display = 'none';
-      currentSubject = null;
+    // 🔄 อัปเดตสถานะการซิงค์
+    function updateSyncStatus(status) {
+      const statusElement = document.getElementById('sync-status');
+      if (statusElement) {
+        statusElement.innerHTML = `
+          <span class="refresh-icon">🔄</span>
+          <span>${status}</span>
+        `;
+      }
+    }
+
+    // 🔄 ฟังก์ชันรีเฟรชข้อมูลอัตโนมัติ
+    function startAutoRefresh() {
+      // รีเฟรชทุก 30 วินาที
+      setInterval(async () => {
+        console.log('🔄 Auto-refresh: กำลังดึงข้อมูลใหม่...');
+        await loadDataFromGoogleSheets();
+        
+        // อัปเดต UI ถ้าอยู่ในหน้าสรุปผลหรือสถิติรายบุคคล
+        const summarySection = document.getElementById('summary-section');
+        const dashboardSection = document.getElementById('student-dashboard-section');
+        
+        if (summarySection && summarySection.style.display !== 'none') {
+          showSummary(); // รีโหลดหน้าสรุปผล
+        }
+        
+        if (dashboardSection && dashboardSection.style.display !== 'none') {
+          showStudentDashboard(); // รีโหลดหน้าสถิติ
+        }
+      }, 30000); // 30000 มิลลิวินาที = 30 วินาที
+    }
+
+    // 🔄 รีเฟรชแบบ Manual
+    async function manualRefresh() {
+      console.log('🔄 Manual refresh...');
+      updateSyncStatus('🔄 กำลังโหลด...');
+      await loadDataFromGoogleSheets();
+      
+      const summarySection = document.getElementById('summary-section');
+      const dashboardSection = document.getElementById('student-dashboard-section');
+      
+      if (summarySection && summarySection.style.display !== 'none') {
+        await showSummary();
+      }
+      
+      if (dashboardSection && dashboardSection.style.display !== 'none') {
+        await showStudentDashboard();
+      }
+      
+      alert('✅ รีเฟรชข้อมูลเรียบร้อย');
+    }
+
+    function selectSubject(index) {
+      currentSubjectIndex = index;
+      document.getElementById('subject-selection').style.display = 'none';
+      document.getElementById('student-info-section').style.display = 'block';
+      document.getElementById('exam-title').textContent = subjects[index].name;
     }
 
     function startExam() {
       const name = document.getElementById('student-name').value.trim();
-      const classroom = document.getElementById('class-room').value;
+      const classroom = document.getElementById('student-class').value.trim();
       const number = document.getElementById('student-number').value.trim();
 
       if (!name || !classroom || !number) {
-        alert('กรุณากรอกข้อมูลนักเรียนให้ครบถ้วน');
+        alert('กรุณากรอกข้อมูลให้ครบถ้วน');
         return;
       }
 
-      studentData = { name, classroom, number };
+      studentInfo = { name, classroom, number };
+      
       document.getElementById('student-info-section').style.display = 'none';
-      document.getElementById('quiz-section').style.display = 'block';
-      renderQuestions();
+      document.getElementById('exam-section').style.display = 'block';
+      document.getElementById('student-info-display').textContent = `${name} ชั้น ${classroom} เลขที่ ${number}`;
+      document.getElementById('current-subject-title').textContent = subjects[currentSubjectIndex].name;
+
+      userAnswers = new Array(subjects[currentSubjectIndex].questions.length).fill(null);
+      currentQuestionIndex = 0;
+      
+      createQuestionNavigator();
+      displayQuestion();
     }
 
-    function renderQuestions() {
-      const subject = allSubjects[currentSubject];
-      const container = document.getElementById('questions-container');
-      const totalQuestions = subject.questions.length;
+    function createQuestionNavigator() {
+      const navigator = document.getElementById('question-navigator');
+      navigator.innerHTML = '';
       
-      document.getElementById('current-total').textContent = totalQuestions;
-      container.innerHTML = '';
-
-      subject.questions.forEach((q, index) => {
-        const questionDiv = document.createElement('div');
-        questionDiv.className = 'question-card bg-gray-50 p-6 rounded-lg mb-6';
-        questionDiv.innerHTML = `
-          <h3 class="font-semibold text-gray-800 mb-4">${q.question}</h3>
-          <div class="space-y-3">
-            ${q.options.map((option, optIndex) => `
-              <button class="option-button w-full text-left p-4 rounded-lg" onclick="selectAnswer(${index}, ${optIndex})">
-                <span class="font-medium text-sm">${String.fromCharCode(97 + optIndex)}.)</span>
-                <span class="ml-2">${option}</span>
-              </button>
-            `).join('')}
-          </div>
-        `;
-        container.appendChild(questionDiv);
+      subjects[currentSubjectIndex].questions.forEach((_, index) => {
+        const btn = document.createElement('button');
+        btn.textContent = index + 1;
+        btn.className = 'w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-green-400 transition-all';
+        btn.onclick = () => {
+          currentQuestionIndex = index;
+          displayQuestion();
+        };
+        navigator.appendChild(btn);
       });
     }
 
-    function selectAnswer(questionIndex, optionIndex) {
-      currentAnswers[questionIndex] = optionIndex;
-      const buttons = document.querySelectorAll('.option-button');
-      buttons.forEach((btn, idx) => {
-        const baseIndex = Math.floor(idx / 4);
-        const optIdx = idx % 4;
-        btn.classList.remove('selected');
-        if (baseIndex === questionIndex && optIdx === optionIndex) {
+    function displayQuestion() {
+      const question = subjects[currentSubjectIndex].questions[currentQuestionIndex];
+      const totalQuestions = subjects[currentSubjectIndex].questions.length;
+      
+      document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+      document.getElementById('total-questions').textContent = totalQuestions;
+      document.getElementById('question-text').textContent = question.question;
+      
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.innerHTML = '';
+      
+      question.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-button w-full text-left p-4 rounded-lg';
+        btn.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+        
+        if (userAnswers[currentQuestionIndex] === index) {
           btn.classList.add('selected');
         }
+        
+        btn.onclick = () => selectAnswer(index);
+        optionsContainer.appendChild(btn);
       });
-    }
-
-    async function submitExam() {
-      const subject = allSubjects[currentSubject];
-      const totalQuestions = subject.questions.length;
-      let correctCount = 0;
-
-      currentAnswers.forEach((answer, index) => {
-        if (answer === subject.questions[index].correct) {
-          correctCount++;
-        }
-      });
-
-      const percentage = Math.round((correctCount / totalQuestions) * 100);
-      const wrongCount = totalQuestions - correctCount;
-
-      // Update display
-      const scoreCircle = document.getElementById('score-circle');
-      scoreCircle.style.setProperty('--percentage', `${percentage * 3.6}deg`);
-      document.getElementById('score-display').textContent = `${percentage}%`;
-      document.getElementById('correct-answers').textContent = correctCount;
-      document.getElementById('wrong-answers').textContent = wrongCount;
-
-      // Grade text
-      let grade = '';
-      if (percentage >= 80) grade = 'ยอดเยี่ยม';
-      else if (percentage >= 70) grade = 'ดีมาก';
-      else if (percentage >= 60) grade = 'ดี';
-      else if (percentage >= 50) grade = 'พอใจ';
-      else grade = 'ต้องปรับปรุง';
-
-      document.getElementById('grade-text').textContent = `เกรด: ${grade}`;
-
-      // Save to local storage
-      const examResult = {
-        name: studentData.name,
-        classroom: studentData.classroom,
-        number: studentData.number,
-        subject: subject.name,
-        percentage: percentage,
-        correct: correctCount,
-        wrong: wrongCount,
-        totalQuestions: totalQuestions,
-        date: new Date().toLocaleString('th-TH')
-      };
       
-      let results = JSON.parse(localStorage.getItem('examResults') || '[]');
-      results.push(examResult);
-      localStorage.setItem('examResults', JSON.stringify(results));
-
-      // Send to Google Sheet
-      await saveToGoogleSheet(subject.sheetName, percentage, correctCount, wrongCount, totalQuestions);
-
-      document.getElementById('quiz-section').style.display = 'none';
-      document.getElementById('results-section').style.display = 'block';
+      document.getElementById('prev-btn').style.display = currentQuestionIndex === 0 ? 'none' : 'flex';
+      document.getElementById('next-btn').style.display = currentQuestionIndex === totalQuestions - 1 ? 'none' : 'flex';
+      document.getElementById('submit-btn').style.display = currentQuestionIndex === totalQuestions - 1 ? 'flex' : 'none';
+      
+      updateQuestionNavigator();
     }
 
-    async function saveToGoogleSheet(sheetName, percentage, correct, wrong, totalQuestions) {
-      try {
-        const timestamp = new Date().toLocaleString('th-TH');
-        const data = {
-          sheet: sheetName,
-          date: timestamp,
-          name: studentData.name,
-          classroom: studentData.classroom,
-          number: studentData.number,
-          subject: allSubjects[currentSubject].name,
-          percentage: percentage,
-          correct: correct,
-          wrong: wrong,
-          totalQuestions: totalQuestions
-        };
+    function selectAnswer(answerIndex) {
+      userAnswers[currentQuestionIndex] = answerIndex;
+      displayQuestion();
+    }
 
-        const response = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-          console.log('บันทึกลง Google Sheet สำเร็จ');
+    function updateQuestionNavigator() {
+      const navigator = document.getElementById('question-navigator');
+      const buttons = navigator.querySelectorAll('button');
+      
+      buttons.forEach((btn, index) => {
+        btn.className = 'w-10 h-10 rounded-lg border-2 transition-all';
+        
+        if (index === currentQuestionIndex) {
+          btn.className += ' bg-green-500 text-white border-green-500';
+        } else if (userAnswers[index] !== null) {
+          btn.className += ' bg-green-100 border-green-400 text-green-700';
+        } else {
+          btn.className += ' border-gray-300 hover:border-green-400';
         }
-      } catch (error) {
-        console.log('เกิดข้อผิดพลาด แต่ผลการสอบจะถูกเก็บไว้ในเครื่องของคุณ', error);
+      });
+    }
+
+    function previousQuestion() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        displayQuestion();
       }
     }
 
+    function nextQuestion() {
+      if (currentQuestionIndex < subjects[currentSubjectIndex].questions.length - 1) {
+        currentQuestionIndex++;
+        displayQuestion();
+      }
+    }
+
+    function submitExam() {
+      const unanswered = userAnswers.filter(a => a === null).length;
+      
+      if (unanswered > 0) {
+        if (!confirm(`คุณยังไม่ได้ตอบ ${unanswered} ข้อ\nต้องการส่งข้อสอบหรือไม่?`)) {
+          return;
+        }
+      }
+      
+      calculateAndDisplayResults();
+    }
+
+    function calculateAndDisplayResults() {
+      let correct = 0;
+      const questions = subjects[currentSubjectIndex].questions;
+      
+      userAnswers.forEach((answer, index) => {
+        if (answer === questions[index].correct) {
+          correct++;
+        }
+      });
+      
+      const wrong = questions.length - correct;
+      const percentage = ((correct / questions.length) * 100).toFixed(2);
+      
+      document.getElementById('exam-section').style.display = 'none';
+      document.getElementById('results-section').style.display = 'block';
+      
+      document.getElementById('correct-count').textContent = correct;
+      document.getElementById('wrong-count').textContent = wrong;
+      document.getElementById('score-display-text').textContent = `${correct}/${questions.length}`;
+      document.getElementById('score-percentage').textContent = `${percentage}%`;
+      
+      const scoreCircle = document.getElementById('score-display');
+      const percentageDeg = (percentage / 100) * 360;
+      scoreCircle.style.setProperty('--percentage', `${percentageDeg}deg`);
+      
+      displayAnswersReview();
+      saveToLocalStorage(percentage, correct, wrong);
+    }
+
+    function displayAnswersReview() {
+      const reviewContainer = document.getElementById('answers-review');
+      reviewContainer.innerHTML = '<h3 class="font-bold text-lg mb-4">รายละเอียดคำตอบ</h3>';
+      
+      const questions = subjects[currentSubjectIndex].questions;
+      
+      questions.forEach((question, index) => {
+        const userAnswer = userAnswers[index];
+        const correctAnswer = question.correct;
+        const isCorrect = userAnswer === correctAnswer;
+        
+        const div = document.createElement('div');
+        div.className = `p-4 rounded-lg ${isCorrect ? 'bg-green-50 border-l-4 border-green-500' : 'bg-red-50 border-l-4 border-red-500'}`;
+        
+        div.innerHTML = `
+          <div class="flex items-start justify-between mb-2">
+            <span class="font-semibold text-gray-700">ข้อ ${index + 1}</span>
+            <span class="text-2xl">${isCorrect ? '✅' : '❌'}</span>
+          </div>
+          <p class="text-gray-700 mb-2">${question.question}</p>
+          <div class="text-sm">
+            ${userAnswer !== null ? `<p class="mb-1">คำตอบของคุณ: <span class="${isCorrect ? 'text-green-600' : 'text-red-600'} font-semibold">${question.options[userAnswer]}</span></p>` : '<p class="mb-1 text-gray-500">ไม่ได้ตอบ</p>'}
+            ${!isCorrect ? `<p>เฉลย: <span class="text-green-600 font-semibold">${question.options[correctAnswer]}</span></p>` : ''}
+          </div>
+        `;
+        
+        reviewContainer.appendChild(div);
+      });
+    }
+
+    function saveToLocalStorage(percentage, correct, wrong) {
+      const result = {
+        date: new Date().toLocaleString('th-TH', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        }),
+        name: studentInfo.name,
+        classroom: studentInfo.classroom,
+        number: studentInfo.number,
+        subject: subjects[currentSubjectIndex].name,
+        percentage: parseFloat(percentage),
+        correct: correct,
+        wrong: wrong
+      };
+
+      const results = JSON.parse(localStorage.getItem('examResults') || '[]');
+      results.push(result);
+      localStorage.setItem('examResults', JSON.stringify(results));
+
+      console.log('💾 บันทึกข้อมูลใน LocalStorage:', result);
+
+      sendToGoogleSheets(result);
+    }
+
+    function sendToGoogleSheets(result) {
+      const data = {
+        sheet: subjects[currentSubjectIndex].sheet,
+        date: result.date,
+        name: result.name,
+        classroom: result.classroom,
+        number: result.number,
+        subject: result.subject,
+        percentage: result.percentage,
+        correct: result.correct,
+        wrong: result.wrong
+      };
+
+      fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      }).then(() => {
+        console.log('✅ ส่งข้อมูลไป Google Sheets แล้ว');
+      }).catch(error => {
+        console.log('⚠️ อาจมีปัญหาในการส่งข้อมูล (ใช้ no-cors mode):', error);
+      });
+    }
+
+    function reviewAnswers() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function resetExam() {
-      currentSubject = null;
-      currentAnswers = [];
-      studentData = {};
+      if (confirm('คุณต้องการทำข้อสอบอีกครั้งหรือไม่?')) {
+        document.getElementById('results-section').style.display = 'none';
+        document.getElementById('student-info-section').style.display = 'block';
+        document.getElementById('student-name').value = studentInfo.name;
+        document.getElementById('student-class').value = studentInfo.classroom;
+        document.getElementById('student-number').value = studentInfo.number;
+      }
+    }
+
+    function backToSubjectSelection() {
       document.getElementById('results-section').style.display = 'none';
       document.getElementById('subject-selection').style.display = 'block';
       document.getElementById('student-name').value = '';
-      document.getElementById('class-room').value = '';
+      document.getElementById('student-class').value = '';
       document.getElementById('student-number').value = '';
     }
 
-    function showSummary() {
+    async function showSummary() {
+      // ดึงข้อมูลจาก Google Sheets ก่อน
+      const results = await loadDataFromGoogleSheets();
+      
       document.getElementById('subject-selection').style.display = 'none';
       document.getElementById('summary-section').style.display = 'block';
       
-      // Display summary from localStorage
-      const results = JSON.parse(localStorage.getItem('examResults') || '[]');
-      const summaryContent = document.getElementById('summary-content');
+      const tbody = document.getElementById('summary-tbody');
       
       if (results.length === 0) {
-        summaryContent.innerHTML = `
-          <div class="text-center text-gray-500 py-8">
-            <div class="text-4xl mb-4">📝</div>
-            <p>ยังไม่มีข้อมูลการสอบ</p>
-            <p class="text-sm">กรุณาทำแบบทดสอบก่อนเพื่อดูสรุปผลคะแนน</p>
-          </div>
+        tbody.innerHTML = '<tr><td colspan="8" class="text-center py-8 text-gray-500">ยังไม่มีข้อมูลคะแนน</td></tr>';
+        return;
+      }
+      
+      // เรียงลำดับตามวันที่ล่าสุด
+      results.sort((a, b) => new Date(b.date) - new Date(a.date));
+      
+      let html = '';
+      results.forEach((result, index) => {
+        const scoreClass = result.percentage >= 70 ? 'text-green-600' : 
+                           result.percentage >= 50 ? 'text-yellow-600' : 'text-red-600';
+        
+        html += `
+          <tr class="hover:bg-green-50 transition-all">
+            <td class="px-4 py-3 text-center">${index + 1}</td>
+            <td class="px-4 py-3">${result.date}</td>
+            <td class="px-4 py-3 font-semibold">${result.name}</td>
+            <td class="px-4 py-3 text-center">${result.classroom}</td>
+            <td class="px-4 py-3 text-center">${result.number}</td>
+            <td class="px-4 py-3">${result.subject}</td>
+            <td class="px-4 py-3 text-center font-bold ${scoreClass}">${result.percentage}%</td>
+            <td class="px-4 py-3 text-center">
+              <span class="text-green-600 font-semibold">${result.correct}</span> / 
+              <span class="text-red-600 font-semibold">${result.wrong}</span>
+            </td>
+          </tr>
         `;
-      } else {
-        const subjectStats = {};
-        results.forEach(result => {
-          if (!subjectStats[result.subject]) {
-            subjectStats[result.subject] = [];
-          }
-          subjectStats[result.subject].push(result);
-        });
+      });
+      
+      tbody.innerHTML = html;
+    }
 
-        let html = '';
-        for (const [subject, records] of Object.entries(subjectStats)) {
-          const avg = (records.reduce((sum, r) => sum + r.percentage, 0) / records.length).toFixed(1);
-          const max = Math.max(...records.map(r => r.percentage));
-          const min = Math.min(...records.map(r => r.percentage));
-          const totalQ = records[0].totalQuestions || 20;
-          
-          const bgColor = subject === 'การอนุรักษ์ธรรมชาติ' ? 'bg-green-50 border-green-200' : 'bg-yellow-50 border-yellow-200';
+    async function showStudentDashboard() {
+      // ดึงข้อมูลจาก Google Sheets ก่อน
+      const results = await loadDataFromGoogleSheets();
+      
+      document.getElementById('subject-selection').style.display = 'none';
+      document.getElementById('student-dashboard-section').style.display = 'block';
+      
+      // สร้างรายการนักเรียนที่ไม่ซ้ำกัน
+      const studentMap = new Map();
+      
+      results.forEach(result => {
+        const key = `${result.name}-${result.classroom}-${result.number}`;
+        if (!studentMap.has(key)) {
+          studentMap.set(key, {
+            name: result.name,
+            classroom: result.classroom,
+            number: result.number,
+            records: []
+          });
+        }
+        studentMap.get(key).records.push(result);
+      });
+      
+      allStudentsData = Array.from(studentMap.values()).map(student => {
+        return {
+          ...student,
+          ...student.records[0] // เอาข้อมูลอื่นๆ จาก record แรก
+        };
+      });
+      
+      displayStudentsList();
+    }
+
+    function displayStudentsList() {
+      const studentsList = document.getElementById('students-list');
+      
+      if (allStudentsData.length === 0) {
+        studentsList.innerHTML = '<div class="text-center py-8 text-gray-500">ยังไม่มีข้อมูลนักเรียน</div>';
+        return;
+      }
+      
+      // เรียงตามชื่อ
+      allStudentsData.sort((a, b) => a.name.localeCompare(b.name, 'th'));
+      
+      let html = '';
+      for (const student of allStudentsData) {
+        const records = student.records || [];
+        const name = student.name;
+        const classroom = student.classroom;
+        const number = student.number;
+        
+        if (records.length > 0) {
+          const avgScore = (records.reduce((sum, r) => sum + r.percentage, 0) / records.length).toFixed(2);
           
           html += `
-            <div class="${bgColor} border-2 p-4 rounded-xl">
-              <h3 class="font-bold text-gray-800 mb-3">${subject} (${totalQ} ข้อ)</h3>
-              <div class="grid grid-cols-3 gap-3 text-sm">
-                <div class="bg-white p-3 rounded-lg text-center">
-                  <div class="font-bold text-yellow-600">${avg}%</div>
-                  <div class="text-gray-600 text-xs">คะแนนเฉลี่ย</div>
+            <div class="p-4 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-all cursor-pointer" onclick="showStudentDetail('${name}', '${classroom}', '${number}')">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">${name}</h3>
+                  <p class="text-sm text-gray-600">ชั้น ${classroom} เลขที่ ${number}</p>
                 </div>
-                <div class="bg-white p-3 rounded-lg text-center">
-                  <div class="font-bold text-green-600">${max}%</div>
-                  <div class="text-gray-600 text-xs">คะแนนสูงสุด</div>
+                <div class="text-right">
+                  <div class="text-2xl font-bold text-green-600">${avgScore}%</div>
+                  <div class="text-xs text-gray-500">${records.length} ครั้ง</div>
                 </div>
-                <div class="bg-white p-3 rounded-lg text-center">
-                  <div class="font-bold text-red-600">${min}%</div>
-                  <div class="text-gray-600 text-xs">คะแนนต่ำสุด</div>
-                </div>
-              </div>
-              <div class="mt-3 text-sm text-gray-600">
-                จำนวนผู้สอบ: ${records.length} คน
               </div>
             </div>
           `;
         }
-        summaryContent.innerHTML = html;
       }
-    }
-
-    function showStudentDashboard() {
-      document.getElementById('subject-selection').style.display = 'none';
-      document.getElementById('student-dashboard-section').style.display = 'block';
-      loadAllStudents();
-    }
-
-    function loadAllStudents() {
-      const results = JSON.parse(localStorage.getItem('examResults') || '[]');
-      allStudentsData = results;
-      displayStudents(results);
+      studentsList.innerHTML = html;
     }
 
     function filterStudents() {
-      const searchText = document.getElementById('student-search').value.toLowerCase();
-      const classFilter = document.getElementById('class-filter').value;
-      const subjectFilter = document.getElementById('subject-filter').value;
-
-      let filtered = allStudentsData.filter(student => {
-        const matchName = student.name.toLowerCase().includes(searchText) || 
-                         student.number.toString().includes(searchText);
-        const matchClass = classFilter === '' || student.classroom === classFilter;
-        const matchSubject = subjectFilter === '' || student.subject === subjectFilter;
-        
-        return matchName && matchClass && matchSubject;
-      });
-
-      displayStudents(filtered);
-    }
-
-    function displayStudents(students) {
-      const studentsList = document.getElementById('students-list');
+      const searchTerm = document.getElementById('student-search').value.toLowerCase();
       
-      if (students.length === 0) {
-        studentsList.innerHTML = `
-          <div class="text-center text-gray-500 py-8">
-            <div class="text-4xl mb-4">👥</div>
-            <p>ไม่พบข้อมูลนักเรียน</p>
-          </div>
-        `;
-        return;
-      }
-
-      const groupedByStudent = {};
-      students.forEach(student => {
-        const key = `${student.name}-${student.classroom}-${student.number}`;
-        if (!groupedByStudent[key]) {
-          groupedByStudent[key] = [];
-        }
-        groupedByStudent[key].push(student);
+      const filteredStudents = allStudentsData.filter(student => {
+        return student.name.toLowerCase().includes(searchTerm) ||
+               student.classroom.toLowerCase().includes(searchTerm) ||
+               student.number.toString().includes(searchTerm);
       });
-
+      
+      const studentsList = document.getElementById('students-list');
       let html = '';
-      for (const [key, records] of Object.entries(groupedByStudent)) {
-        const [name, classroom, number] = key.split('-');
-        const avgScore = (records.reduce((sum, r) => sum + r.percentage, 0) / records.length).toFixed(1);
+      
+      for (const student of filteredStudents) {
+        const records = student.records || [];
+        const name = student.name;
+        const classroom = student.classroom;
+        const number = student.number;
         
-        html += `
-          <div class="bg-white border-2 border-blue-200 rounded-lg p-4 hover:shadow-lg transition-all cursor-pointer" onclick="showStudentDetail('${name}', '${classroom}', '${number}')">
-            <div class="flex items-center justify-between">
-              <div>
-                <h3 class="font-bold text-gray-800">${name}</h3>
-                <p class="text-sm text-gray-600">ชั้น ${classroom} เลขที่ ${number}</p>
-              </div>
-              <div class="text-right">
-                <div class="text-2xl font-bold text-blue-600">${avgScore}%</div>
-                <div class="text-xs text-gray-500">${records.length} ครั้ง</div>
+        if (records.length > 0) {
+          const avgScore = (records.reduce((sum, r) => sum + r.percentage, 0) / records.length).toFixed(2);
+          
+          html += `
+            <div class="p-4 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-all cursor-pointer" onclick="showStudentDetail('${name}', '${classroom}', '${number}')">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h3 class="font-bold text-gray-800">${name}</h3>
+                  <p class="text-sm text-gray-600">ชั้น ${classroom} เลขที่ ${number}</p>
+                </div>
+                <div class="text-right">
+                  <div class="text-2xl font-bold text-green-600">${avgScore}%</div>
+                  <div class="text-xs text-gray-500">${records.length} ครั้ง</div>
+                </div>
               </div>
             </div>
-          </div>
-        `;
+          `;
+        }
       }
-      studentsList.innerHTML = html;
+      
+      studentsList.innerHTML = html || '<div class="text-center py-8 text-gray-500">ไม่พบข้อมูลที่ค้นหา</div>';
     }
 
     function showStudentDetail(name, classroom, number) {
@@ -2082,27 +1508,33 @@
       document.getElementById('modal-student-name').textContent = `${name} (${classroom} เลขที่ ${number})`;
       
       let html = '<div class="space-y-4">';
-      results.forEach((result, index) => {
-        const scoreColor = result.percentage >= 70 ? 'text-green-600' : result.percentage >= 50 ? 'text-yellow-600' : 'text-red-600';
-        const totalQ = result.totalQuestions || 20;
-        html += `
-          <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
-            <div class="flex justify-between items-start mb-2">
-              <div>
-                <h4 class="font-semibold text-gray-800">${result.subject} (${totalQ} ข้อ)</h4>
-                <p class="text-sm text-gray-600">${result.date}</p>
+      
+      if (results.length > 0 && results[0].records) {
+        results[0].records.forEach((result, index) => {
+          const scoreColor = result.percentage >= 70 ? 'text-green-600' : result.percentage >= 50 ? 'text-yellow-600' : 'text-red-600';
+          html += `
+            <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400">
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <h4 class="font-semibold text-gray-800">${result.subject}</h4>
+                  <p class="text-sm text-gray-600">${result.date}</p>
+                </div>
+                <div class="text-right">
+                  <div class="text-2xl font-bold ${scoreColor}">${result.percentage}%</div>
+                </div>
               </div>
-              <div class="text-right">
-                <div class="text-2xl font-bold ${scoreColor}">${result.percentage}%</div>
+              <div class="grid grid-cols-2 gap-2 text-sm mb-3">
+                <div class="bg-white p-2 rounded">ข้อถูก: <span class="font-bold text-green-600">${result.correct}</span>/20</div>
+                <div class="bg-white p-2 rounded">ข้อผิด: <span class="font-bold text-red-600">${result.wrong}</span>/20</div>
               </div>
+              <button onclick="deleteRecord('${result.date}', '${result.name}', '${result.classroom}', '${result.number}', '${result.subject}')" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition-all text-sm">
+                🗑️ ลบข้อมูลนี้
+              </button>
             </div>
-            <div class="grid grid-cols-2 gap-2 text-sm">
-              <div class="bg-white p-2 rounded">ข้อถูก: <span class="font-bold text-green-600">${result.correct}</span>/${totalQ}</div>
-              <div class="bg-white p-2 rounded">ข้อผิด: <span class="font-bold text-red-600">${result.wrong}</span>/${totalQ}</div>
-            </div>
-          </div>
-        `;
-      });
+          `;
+        });
+      }
+      
       html += '</div>';
       
       modalContent.innerHTML = html;
@@ -2113,9 +1545,12 @@
       document.getElementById('student-detail-modal').style.display = 'none';
     }
 
-    /**
-     * ฟังก์ชันลบข้อมูลที่เก็บไว้ใน LocalStorage
-     */
+    function backToSubjects() {
+      document.getElementById('summary-section').style.display = 'none';
+      document.getElementById('student-dashboard-section').style.display = 'none';
+      document.getElementById('subject-selection').style.display = 'block';
+    }
+
     function clearLocalStorage() {
       if (confirm('คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลทั้งหมด?\n\nการลบนี้ไม่สามารถยกเลิกได้')) {
         localStorage.clear();
@@ -2123,6 +1558,145 @@
         location.reload();
       }
     }
+
+    function exportToCSV() {
+      const results = JSON.parse(localStorage.getItem('examResults') || '[]');
+      
+      if (results.length === 0) {
+        alert('ไม่มีข้อมูลให้ส่งออก');
+        return;
+      }
+
+      let csv = '\ufeff';
+      csv += 'วันที่/เวลา,ชื่อ-นามสกุล,ชั้น,เลขที่,รายวิชา,คะแนน (%),ข้อถูก,ข้อผิด\n';
+      
+      results.forEach(result => {
+        csv += `"${result.date}","${result.name}","${result.classroom}","${result.number}","${result.subject}","${result.percentage}","${result.correct}","${result.wrong}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      
+      link.setAttribute('href', url);
+      link.setAttribute('download', `ผลการสอบลูกเสือ_${new Date().toLocaleDateString('th-TH')}.csv`);
+      link.style.visibility = 'hidden';
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function exportToExcel() {
+      const results = JSON.parse(localStorage.getItem('examResults') || '[]');
+      
+      if (results.length === 0) {
+        alert('ไม่มีข้อมูลให้ส่งออก');
+        return;
+      }
+
+      let html = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">';
+      html += '<head><meta charset="utf-8"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>';
+      html += '<body>';
+      html += '<table border="1">';
+      html += '<thead><tr><th>วันที่/เวลา</th><th>ชื่อ-นามสกุล</th><th>ชั้น</th><th>เลขที่</th><th>รายวิชา</th><th>คะแนน (%)</th><th>ข้อถูก</th><th>ข้อผิด</th></tr></thead>';
+      html += '<tbody>';
+      
+      results.forEach(result => {
+        html += '<tr>';
+        html += `<td>${result.date}</td>`;
+        html += `<td>${result.name}</td>`;
+        html += `<td>${result.classroom}</td>`;
+        html += `<td>${result.number}</td>`;
+        html += `<td>${result.subject}</td>`;
+        html += `<td>${result.percentage}</td>`;
+        html += `<td>${result.correct}</td>`;
+        html += `<td>${result.wrong}</td>`;
+        html += '</tr>';
+      });
+      
+      html += '</tbody></table></body></html>';
+
+      const blob = new Blob([html], { type: 'application/vnd.ms-excel' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      
+      link.setAttribute('href', url);
+      link.setAttribute('download', `ผลการสอบลูกเสือ_${new Date().toLocaleDateString('th-TH')}.xls`);
+      link.style.visibility = 'hidden';
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function deleteRecord(date, name, classroom, number, subject) {
+      if (!confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้?\n\nชื่อ: ${name}\nชั้น: ${classroom} เลขที่ ${number}\nวิชา: ${subject}\nวันที่: ${date}`)) {
+        return;
+      }
+
+      const results = JSON.parse(localStorage.getItem('examResults') || '[]');
+      const filteredResults = results.filter(r => {
+        return !(r.date === date && r.name === name && r.classroom === classroom && 
+                 r.number === number && r.subject === subject);
+      });
+      
+      localStorage.setItem('examResults', JSON.stringify(filteredResults));
+      
+      deleteFromGoogleSheets(date, name, classroom, number, subject);
+      
+      alert('ลบข้อมูลเรียบร้อยแล้ว');
+      closeStudentModal();
+      showStudentDashboard();
+    }
+
+    function deleteFromGoogleSheets(date, name, classroom, number, subject) {
+      const subjectToSheet = {
+        'เครื่องหมายลูกเสือชั้นพิเศษ': 'Sheet1',
+        'หน้าที่พลเมือง': 'Sheet2',
+        'นักบุกเบิก': 'Sheet3',
+        'การสะกดรอย': 'Sheet4',
+        'ผู้พิทักษ์ป่า': 'Sheet5'
+      };
+
+      const sheetName = subjectToSheet[subject] || 'Sheet1';
+
+      fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: 'delete',
+          sheet: sheetName,
+          date: date,
+          name: name,
+          classroom: classroom,
+          number: number,
+          subject: subject
+        })
+      }).then(() => {
+        console.log('✅ ส่งคำสั่งลบไป Google Sheets แล้ว');
+      }).catch(error => {
+        console.log('⚠️ อาจมีปัญหาในการลบข้อมูลใน Google Sheets:', error);
+      });
+    }
+
+    // ========================================
+    // 🚀 เริ่มต้นระบบเมื่อโหลดหน้าเว็บ
+    // ========================================
+    window.addEventListener('load', async function() {
+      console.log('🎯 เริ่มโหลดระบบ...');
+      
+      // โหลดข้อมูลจาก Google Sheets ทันทีเมื่อเปิดหน้าเว็บ
+      await loadDataFromGoogleSheets();
+      
+      // เริ่มระบบรีเฟรชอัตโนมัติ
+      startAutoRefresh();
+      
+      console.log('✅ ระบบพร้อมใช้งาน - รีเฟรชอัตโนมัติทุก 30 วินาที');
+    });
   </script>
 </body>
 </html>
