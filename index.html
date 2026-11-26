@@ -136,7 +136,7 @@
     <div class="bg-white rounded-2xl card-shadow p-6 mb-6">
       <div class="flex items-center justify-between mb-4">
         <div class="flex items-center space-x-4">
-          <img src="https://img2.pic.in.th/pic/sa1.png" alt="Logo" class="logo-img">
+          <img src="../../logo.png" alt="Logo" class="logo-img">
           <div>
             <h1 class="text-2xl font-bold text-gray-800" id="exam-title">แบบทดสอบลูกเสือสามัญรุ่นใหญ่ ม.2</h1>
             <p class="text-gray-600" id="school-name">โรงเรียนสา</p>
@@ -145,7 +145,7 @@
         </div>
         <div class="text-right">
           <div class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
-            📝 20 ข้อ
+            📝 <span id="question-count-badge">20</span> ข้อ
           </div>
         </div>
       </div>
@@ -207,7 +207,7 @@
             <span class="text-2xl mr-3">🌳</span> 
             <span class="font-semibold text-gray-800">วิชาที่ 5</span>
           </div>
-          <p class="text-sm text-gray-600">ผู้พิทักษ์ป่า</p>
+          <p class="text-sm text-gray-600">ผู้พิทักษ์ป่า + ธรรมชาติวิทยา <span class="text-xs text-green-700 font-semibold">(30 ข้อ)</span></p>
         </button>
 
         <button onclick="showSummary()" class="subject-card p-4 border-2 border-green-300 rounded-xl hover:border-green-500 hover:bg-green-100 transition-all text-left bg-green-50">
@@ -972,6 +972,56 @@
             question: "วันสิ่งแวดล้อมโลกตรงกับวันที่เท่าใด",
             options: ["5 มิถุนายน", "5 ธันวาคม", "1 มกราคม", "1 กรกฎาคม"],
             correct: 0
+          },
+          {
+            question: "[ธรรมชาติวิทยา] ข้อใดเป็น \"ผู้ย่อยสลาย\" ในระบบนิเวศ",
+            options: ["หญ้า", "กบ", "เห็ดและรา", "นกเอี้ยง"],
+            correct: 2
+          },
+          {
+            question: "[ธรรมชาติวิทยา] ข้อใดเป็น \"ผู้ผลิต\" ในระบบนิเวศ",
+            options: ["ต้นหญ้า", "ตั๊กแตน", "งู", "เหยี่ยว"],
+            correct: 0
+          },
+          {
+            question: "[ธรรมชาติวิทยา] สัตว์ในข้อใด \"ไม่ใช่\" แมลง",
+            options: ["ผีเสื้อ", "มด", "ตั๊กแตน", "แมงมุม"],
+            correct: 3
+          },
+          {
+            question: "[ธรรมชาติวิทยา] ลักษณะสำคัญของแมลงคือข้อใด",
+            options: ["ลำตัว 2 ส่วน ขา 8 ขา", "ลำตัว 3 ส่วน ขา 6 ขา", "ลำตัว 3 ส่วน ขา 8 ขา", "ลำตัว 2 ส่วน ขา 6 ขา"],
+            correct: 1
+          },
+          {
+            question: "[ธรรมชาติวิทยา] ห่วงโซ่อาหารในข้อใดเรียงลำดับถูกต้อง",
+            options: ["กบ → หญ้า → งู → ตั๊กแตน", "งู → กบ → ตั๊กแตน → หญ้า", "หญ้า → ตั๊กแตน → กบ → งู", "ตั๊กแตน → หญ้า → งู → กบ"],
+            correct: 2
+          },
+          {
+            question: "[ธรรมชาติวิทยา] ใบของต้นหญ้ามีเส้นใบแบบใด",
+            options: ["แบบร่างแห", "แบบขนาน", "แบบขนนก", "ไม่มีเส้นใบ"],
+            correct: 1
+          },
+          {
+            question: "[ธรรมชาติวิทยา] การบันทึกการสำรวจธรรมชาติ ควรมีข้อมูลใดทุกครั้ง",
+            options: ["วัน เวลา และสถานที่", "ความรู้สึกส่วนตัว", "ราคาของต้นไม้", "ชื่อเพื่อนในหมู่"],
+            correct: 0
+          },
+          {
+            question: "[ธรรมชาติวิทยา] ข้อใดเป็นการปฏิบัติที่ถูกต้องของนักธรรมชาติวิทยา",
+            options: ["เด็ดดอกไม้ทุกชนิดมาเก็บ", "จับลูกนกกลับไปเลี้ยงที่บ้าน", "ชิมผลไม้ป่าเพื่อรู้รสชาติ", "ถ่ายภาพ บันทึก แล้วปล่อยสัตว์ไว้ที่เดิม"],
+            correct: 3
+          },
+          {
+            question: "[ธรรมชาติวิทยา] ถ้าพบงูระหว่างออกสำรวจ ควรปฏิบัติอย่างไร",
+            options: ["ใช้ไม้ตีไล่ทันที", "ยืนนิ่ง ถอยห่างช้า ๆ แล้วแจ้งผู้กำกับ", "วิ่งหนีส่งเสียงดัง", "จับขึ้นมาถ่ายรูป"],
+            correct: 1
+          },
+          {
+            question: "[ธรรมชาติวิทยา] การเก็บใบไม้มาทำตัวอย่างพรรณไม้แห้งที่ถูกต้องคือข้อใด",
+            options: ["ถอนต้นไม้มาทั้งต้น", "เด็ดใบให้มากที่สุดจากต้นเดียว", "เก็บใบที่ร่วงแล้ว หรือขออนุญาตเด็ดเพียง 1–2 ใบ", "เก็บเฉพาะใบไม้ที่มียางขาว"],
+            correct: 2
           }
         ]
       }
@@ -1087,6 +1137,7 @@
       document.getElementById('subject-selection').style.display = 'none';
       document.getElementById('student-info-section').style.display = 'block';
       document.getElementById('exam-title').textContent = subjects[index].name;
+      const qcb = document.getElementById('question-count-badge'); if (qcb) qcb.textContent = subjects[index].questions.length;
     }
 
     function startExam() {
@@ -1524,8 +1575,8 @@
                 </div>
               </div>
               <div class="grid grid-cols-2 gap-2 text-sm mb-3">
-                <div class="bg-white p-2 rounded">ข้อถูก: <span class="font-bold text-green-600">${result.correct}</span>/20</div>
-                <div class="bg-white p-2 rounded">ข้อผิด: <span class="font-bold text-red-600">${result.wrong}</span>/20</div>
+                <div class="bg-white p-2 rounded">ข้อถูก: <span class="font-bold text-green-600">${result.correct}</span>/${(Number(result.correct) || 0) + (Number(result.wrong) || 0)}</div>
+                <div class="bg-white p-2 rounded">ข้อผิด: <span class="font-bold text-red-600">${result.wrong}</span>/${(Number(result.correct) || 0) + (Number(result.wrong) || 0)}</div>
               </div>
               <button onclick="deleteRecord('${result.date}', '${result.name}', '${result.classroom}', '${result.number}', '${result.subject}')" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition-all text-sm">
                 🗑️ ลบข้อมูลนี้
